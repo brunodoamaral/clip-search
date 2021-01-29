@@ -7,17 +7,24 @@ Your private semantic search. No cloud needed!
 The easiest way to install is as follow:
 
 ```bash
-git clone https://github.com/brunodoamaral/clip-search.git
+git clone --recursive https://github.com/brunodoamaral/clip-search.git
 cd clip-search
-pip install -r requirements.txt
-python app.py /path/to/my/pictures
+
+python3 -m venv clip-env
+clip-env/bin/pip3 install -r requirements.txt
+
+clip-env/bin/python3 app.py /path/to/my/pictures
 ````
 
 But it is strongly advised to instal using conda:
 
 ```bash
+git clone --recursive https://github.com/brunodoamaral/clip-search.git
+cd clip-search
+
 conda create -n env-clip numpy pip pytorch torchvision -c pytorch -c main
 conda activate env-clip
+
 pip install -r requirements.txt
 python app.py /path/to/my/pictures
 ```

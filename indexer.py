@@ -124,6 +124,7 @@ class ImagesIndexer:
         self.images_files_path = self.index_base_path / "files.json"
         self.thumbs = Thumbnails(self.index_base_path)
 
+        self.index_base_path.mkdir(exist_ok=True)
 
         print("Listing files...")
         self.images_files = sorted(
@@ -211,7 +212,6 @@ class ImagesIndexer:
                     self.index.append(emb_images)
 
             # Save results
-            self.index_base_path.mkdir(exist_ok=True)
             self.index = np.concatenate(self.index)
             self.index /= np.linalg.norm(self.index, axis=-1, keepdims=True)
             np.save(self.index_path, self.index)
