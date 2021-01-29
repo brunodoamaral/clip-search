@@ -22,10 +22,9 @@ But it is strongly advised to instal using conda:
 git clone --recursive https://github.com/brunodoamaral/clip-search.git
 cd clip-search
 
-conda create -n env-clip numpy pip pytorch torchvision -c pytorch -c main
-conda activate env-clip
+conda env create -n clip-env -f environment.yml
+conda activate clip-env
 
-pip install -r requirements.txt
 python app.py /path/to/my/pictures
 ```
 
