@@ -127,4 +127,4 @@ if __name__ == '__main__':
 
     INDEX = ImagesIndexer(images_path)
 
-    app.run()
+    app.run(host= '0.0.0.0')
