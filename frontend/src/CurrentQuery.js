@@ -59,10 +59,8 @@ function createCurrentQuery() {
 
     const appendQuery = async (fname, q, w) => {
         if (w > 0) {
-            console.log('Appending to positive queries', q.slice(1, 8));
             positiveQueries.append(q, w) ;
         } else {
-            console.log('Appending to negative queries', q.slice(1, 8));
             negativeQueries.append(q, -w) ;
         }
 
@@ -70,17 +68,12 @@ function createCurrentQuery() {
 
         let current = await get(currentQuery) ;
 
-        console.log('Appending query before ' + current.slice(1, 8)) ;
-        console.log('positiveQueries ' + positiveQueries.result(0)) ;
-        console.log('negativeQueries ' + negativeQueries.result(0)) ;
-        
-
         for( let i=0; i<current.length; i++) {
             current[i] = current[i] * (1-imagesW) + imagesW * (positiveQueries.result(i) - negW * negativeQueries.result(i)) / (1 - negW) ;
         }
 
-        console.log('Appending query after ' + current.slice(1, 8))
-        set(current)
+        set(current) ;
+        return current ;
     }
 
     return {

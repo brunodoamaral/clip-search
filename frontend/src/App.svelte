@@ -104,10 +104,10 @@
     const appendQuery = async (result, w) => {
         let embedding = await getImageEmbeddings(result.fname) ;
 
-        currentQuery.appendQuery(result.fname, embedding, w) ;
+        let currentQueryValue = await currentQuery.appendQuery(result.fname, embedding, w) ;
 
         let data = {
-            'query': $currentQuery,
+            'query': currentQueryValue,
             'query_excludes': Array.from(currentQuery.getImageList())
         }
 
