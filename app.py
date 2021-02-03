@@ -7,6 +7,7 @@ from flask import Flask, Response, jsonify, request, send_from_directory
 from PIL import Image
 
 from indexer import ImagesIndexer
+import requests
 
 IMAGES_PREFIX_URL = PurePosixPath('/images')
 THUMBS_PREFIX_URL = PurePosixPath('/thumb')
@@ -34,10 +35,6 @@ app = Flask(
         static_url_path='/', 
         static_folder='./frontend/public/'
 )
-
-@app.route('/hello', methods=['GET', 'POST'])
-def ping():
-    return 'pong'
 
 
 @app.route('/get-embedding', methods=['POST', 'GET'])
@@ -118,7 +115,7 @@ if __name__ == '__main__':
     parser.add_argument('images_path', type=str, help='Path to images folder')
     parser.add_argument('-p', '--port', type=int, help='Port to start server', default=5000)
     parser.add_argument('-s', '--host', type=str, help='Host to start server', default='0.0.0.0')
-    parser.add_argument('--debug', help='Host to start server', default=False, action='store_true')
+    parser.add_argument('--dev', help='Start in dev mode', default=False, action='store_true')
 
     args = parser.parse_args()
 
@@ -126,4 +123,27 @@ if __name__ == '__main__':
 
     INDEX = ImagesIndexer(images_path)
 
-    app.run(host=args.host, port=args.port, debug=args.debug)
+    # Add dev env
+    if args.dev:
+        print('Go to ./frontend folder and run: PORT=5001 npm install && npm run dev')
+
+        @app.route('/', methods=['GET', 'POST'])
+        def _proxy(*args, **kwargs):
+            resp = requests.request(
+                method=request.method,
+                url=request.url.replace(request.host_url, 'http//localhost:5001'),
+                headers={key: value for (key, value) in request.headers if key != 'Host'},
+                data=request.get_data(),
+                cookies=request.cookies,
+                allow_redirects=False)
+
+            excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+            headers = [(name, value) for (name, value) in resp.raw.headers.items()
+                    if name.lower() not in excluded_headers]
+
+            response = Response(resp.content, resp.status_code, headers)
+            return response
+
+
+
+    app.run(host=args.host, port=args.port, debug=args.dev)
