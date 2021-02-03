@@ -1,16 +1,11 @@
 # coding: utf-8
-import json
-import numpy as np
-from tqdm import tqdm
-from pathlib import Path, PurePosixPath
-import re
-from flask import Flask, request, url_for, jsonify, redirect, Response, send_from_directory
-from PIL import Image
-from itertools import chain
-from torch.utils.data import Dataset, DataLoader
-from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
-import os
 import argparse
+from pathlib import Path, PurePosixPath
+
+import numpy as np
+from flask import Flask, Response, jsonify, request, send_from_directory
+from PIL import Image
+
 from indexer import ImagesIndexer
 
 IMAGES_PREFIX_URL = PurePosixPath('/images')
@@ -115,7 +110,7 @@ def send_image(path):
 
 @app.route(str(THUMBS_PREFIX_URL / '<path:path>'))
 def send_thumb(path):
-    return  Response(INDEX.thumbnail(path), mimetype='image/jpeg')
+    return Response(INDEX.thumbnail(path), mimetype='image/jpeg')
 
 
 if __name__ == '__main__':
