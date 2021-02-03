@@ -192,7 +192,7 @@ class ImagesIndexer:
                 images_path, self.images_files, self.preprocess_image, self.input_resolution
             )
             dl = DataLoader(
-                ds, batch_size=64, shuffle=False, num_workers=os.cpu_count()
+                ds, batch_size=256, shuffle=False, num_workers=os.cpu_count() // 2
             )
 
             print("Building index with CLIP. It may take a while...")

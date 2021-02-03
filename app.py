@@ -121,10 +121,14 @@ def send_thumb(path):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('images_path', type=str, help='Path to images folder')
+    parser.add_argument('-p', '--port', type=int, help='Port to start server', default=5000)
+    parser.add_argument('-s', '--host', type=str, help='Host to start server', default='0.0.0.0')
+    parser.add_argument('--debug', help='Host to start server', default=False, action='store_true')
+
     args = parser.parse_args()
 
     images_path = Path(args.images_path)
 
     INDEX = ImagesIndexer(images_path)
 
-    app.run(host= '0.0.0.0')
+    app.run(host=args.host, port=args.port, debug=args.debug)
