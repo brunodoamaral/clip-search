@@ -1,5 +1,874 @@
-var app=function(){"use strict";function e(){}const t=e=>e;function n(e){return e()}function r(){return Object.create(null)}function o(e){e.forEach(n)}function i(e){return"function"==typeof e}function s(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}function l(t,...n){if(null==t)return e;const r=t.subscribe(...n);return r.unsubscribe?()=>r.unsubscribe():r}function c(e){let t;return l(e,(e=>t=e))(),t}function a(e,t,n,r){return e[1]&&r?function(e,t){for(const n in t)e[n]=t[n];return e}(n.ctx.slice(),e[1](r(t))):n.ctx}function u(e,t,n,r,o,i,s){const l=function(e,t,n,r){if(e[2]&&r){const o=e[2](r(n));if(void 0===t.dirty)return o;if("object"==typeof o){const e=[],n=Math.max(t.dirty.length,o.length);for(let r=0;r<n;r+=1)e[r]=t.dirty[r]|o[r];return e}return t.dirty|o}return t.dirty}(t,r,o,i);if(l){const o=a(t,n,r,s);e.p(o,l)}}const f="undefined"!=typeof window;let d=f?()=>window.performance.now():()=>Date.now(),p=f?e=>requestAnimationFrame(e):e;const h=new Set;function g(e){h.forEach((t=>{t.c(e)||(h.delete(t),t.f())})),0!==h.size&&p(g)}function m(e,t){e.appendChild(t)}function v(e,t,n){e.insertBefore(t,n||null)}function y(e){e.parentNode.removeChild(e)}function b(e){return document.createElement(e)}function $(e){return document.createTextNode(e)}function k(){return $(" ")}function w(){return $("")}function x(e,t,n,r){return e.addEventListener(t,n,r),()=>e.removeEventListener(t,n,r)}function _(e,t,n){null==n?e.removeAttribute(t):e.getAttribute(t)!==n&&e.setAttribute(t,n)}function D(e,t){e.value=null==t?"":t}function E(e,t){const n=document.createEvent("CustomEvent");return n.initCustomEvent(e,!1,!1,t),n}const S=new Set;let F,A=0;function C(e,t,n,r,o,i,s,l=0){const c=16.666/r;let a="{\n";for(let e=0;e<=1;e+=c){const r=t+(n-t)*i(e);a+=100*e+`%{${s(r,1-r)}}\n`}const u=a+`100% {${s(n,1-n)}}\n}`,f=`__svelte_${function(e){let t=5381,n=e.length;for(;n--;)t=(t<<5)-t^e.charCodeAt(n);return t>>>0}(u)}_${l}`,d=e.ownerDocument;S.add(d);const p=d.__svelte_stylesheet||(d.__svelte_stylesheet=d.head.appendChild(b("style")).sheet),h=d.__svelte_rules||(d.__svelte_rules={});h[f]||(h[f]=!0,p.insertRule(`@keyframes ${f} ${u}`,p.cssRules.length));const g=e.style.animation||"";return e.style.animation=`${g?`${g}, `:""}${f} ${r}ms linear ${o}ms 1 both`,A+=1,f}function P(e,t){const n=(e.style.animation||"").split(", "),r=n.filter(t?e=>e.indexOf(t)<0:e=>-1===e.indexOf("__svelte")),o=n.length-r.length;o&&(e.style.animation=r.join(", "),A-=o,A||p((()=>{A||(S.forEach((e=>{const t=e.__svelte_stylesheet;let n=t.cssRules.length;for(;n--;)t.deleteRule(n);e.__svelte_rules={}})),S.clear())})))}function j(e){F=e}function O(){if(!F)throw new Error("Function called outside component initialization");return F}const z=[],T=[],L=[],R=[],M=Promise.resolve();let N=!1;function q(e){L.push(e)}let B=!1;const I=new Set;function K(){if(!B){B=!0;do{for(let e=0;e<z.length;e+=1){const t=z[e];j(t),Q(t.$$)}for(j(null),z.length=0;T.length;)T.pop()();for(let e=0;e<L.length;e+=1){const t=L[e];I.has(t)||(I.add(t),t())}L.length=0}while(z.length);for(;R.length;)R.pop()();N=!1,B=!1,I.clear()}}function Q(e){if(null!==e.fragment){e.update(),o(e.before_update);const t=e.dirty;e.dirty=[-1],e.fragment&&e.fragment.p(e.ctx,t),e.after_update.forEach(q)}}let U;function G(e,t,n){e.dispatchEvent(E(`${t?"intro":"outro"}${n}`))}const J=new Set;let W;function H(){W={r:0,c:[],p:W}}function V(){W.r||o(W.c),W=W.p}function X(e,t){e&&e.i&&(J.delete(e),e.i(t))}function Y(e,t,n,r){if(e&&e.o){if(J.has(e))return;J.add(e),W.c.push((()=>{J.delete(e),r&&(n&&e.d(1),r())})),e.o(t)}}const Z={duration:0};function ee(n,r,s,l){let c=r(n,s),a=l?0:1,u=null,f=null,m=null;function v(){m&&P(n,m)}function y(e,t){const n=e.b-a;return t*=Math.abs(n),{a:a,b:e.b,d:n,duration:t,start:e.start,end:e.start+t,group:e.group}}function b(r){const{delay:i=0,duration:s=300,easing:l=t,tick:b=e,css:$}=c||Z,k={start:d()+i,b:r};r||(k.group=W,W.r+=1),u||f?f=k:($&&(v(),m=C(n,a,r,s,i,l,$)),r&&b(0,1),u=y(k,s),q((()=>G(n,r,"start"))),function(e){let t;0===h.size&&p(g),new Promise((n=>{h.add(t={c:e,f:n})}))}((e=>{if(f&&e>f.start&&(u=y(f,s),f=null,G(n,u.b,"start"),$&&(v(),m=C(n,a,u.b,u.duration,0,l,c.css))),u)if(e>=u.end)b(a=u.b,1-a),G(n,u.b,"end"),f||(u.b?v():--u.group.r||o(u.group.c)),u=null;else if(e>=u.start){const t=e-u.start;a=u.a+u.d*l(t/u.duration),b(a,1-a)}return!(!u&&!f)})))}return{run(e){i(c)?(U||(U=Promise.resolve(),U.then((()=>{U=null}))),U).then((()=>{c=c(),b(e)})):b(e)},end(){v(),u=f=null}}}function te(e,t){const n=t.token={};function r(e,r,o,i){if(t.token!==n)return;t.resolved=i;let s=t.ctx;void 0!==o&&(s=s.slice(),s[o]=i);const l=e&&(t.current=e)(s);let c=!1;t.block&&(t.blocks?t.blocks.forEach(((e,n)=>{n!==r&&e&&(H(),Y(e,1,1,(()=>{t.blocks[n]===e&&(t.blocks[n]=null)})),V())})):t.block.d(1),l.c(),X(l,1),l.m(t.mount(),t.anchor),c=!0),t.block=l,t.blocks&&(t.blocks[r]=l),c&&K()}if((o=e)&&"object"==typeof o&&"function"==typeof o.then){const n=O();if(e.then((e=>{j(n),r(t.then,1,t.value,e),j(null)}),(e=>{if(j(n),r(t.catch,2,t.error,e),j(null),!t.hasCatch)throw e})),t.current!==t.pending)return r(t.pending,0),!0}else{if(t.current!==t.then)return r(t.then,1,t.value,e),!0;t.resolved=e}var o}function ne(e,t){Y(e,1,1,(()=>{t.delete(e.key)}))}function re(e,t,r){const{fragment:s,on_mount:l,on_destroy:c,after_update:a}=e.$$;s&&s.m(t,r),q((()=>{const t=l.map(n).filter(i);c?c.push(...t):o(t),e.$$.on_mount=[]})),a.forEach(q)}function oe(e,t){const n=e.$$;null!==n.fragment&&(o(n.on_destroy),n.fragment&&n.fragment.d(t),n.on_destroy=n.fragment=null,n.ctx=[])}function ie(e,t){-1===e.$$.dirty[0]&&(z.push(e),N||(N=!0,M.then(K)),e.$$.dirty.fill(0)),e.$$.dirty[t/31|0]|=1<<t%31}function se(t,n,i,s,l,c,a=[-1]){const u=F;j(t);const f=n.props||{},d=t.$$={fragment:null,ctx:null,props:c,update:e,not_equal:l,bound:r(),on_mount:[],on_destroy:[],before_update:[],after_update:[],context:new Map(u?u.$$.context:[]),callbacks:r(),dirty:a,skip_bound:!1};let p=!1;if(d.ctx=i?i(t,f,((e,n,...r)=>{const o=r.length?r[0]:n;return d.ctx&&l(d.ctx[e],d.ctx[e]=o)&&(!d.skip_bound&&d.bound[e]&&d.bound[e](o),p&&ie(t,e)),n})):[],d.update(),p=!0,o(d.before_update),d.fragment=!!s&&s(d.ctx),n.target){if(n.hydrate){const e=function(e){return Array.from(e.childNodes)}(n.target);d.fragment&&d.fragment.l(e),e.forEach(y)}else d.fragment&&d.fragment.c();n.intro&&X(t.$$.fragment),re(t,n.target,n.anchor),K()}j(u)}class le{$destroy(){oe(this,1),this.$destroy=e}$on(e,t){const n=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return n.push(t),()=>{const e=n.indexOf(t);-1!==e&&n.splice(e,1)}}$set(e){var t;this.$$set&&(t=e,0!==Object.keys(t).length)&&(this.$$.skip_bound=!0,this.$$set(e),this.$$.skip_bound=!1)}}
-/*! *****************************************************************************
+
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+var app = (function () {
+    'use strict';
+
+    function noop() { }
+    const identity = x => x;
+    function assign(tar, src) {
+        // @ts-ignore
+        for (const k in src)
+            tar[k] = src[k];
+        return tar;
+    }
+    function is_promise(value) {
+        return value && typeof value === 'object' && typeof value.then === 'function';
+    }
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function is_empty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+    function validate_store(store, name) {
+        if (store != null && typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, ...callbacks) {
+        if (store == null) {
+            return noop;
+        }
+        const unsub = store.subscribe(...callbacks);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
+    function create_slot(definition, ctx, $$scope, fn) {
+        if (definition) {
+            const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
+            return definition[0](slot_ctx);
+        }
+    }
+    function get_slot_context(definition, ctx, $$scope, fn) {
+        return definition[1] && fn
+            ? assign($$scope.ctx.slice(), definition[1](fn(ctx)))
+            : $$scope.ctx;
+    }
+    function get_slot_changes(definition, $$scope, dirty, fn) {
+        if (definition[2] && fn) {
+            const lets = definition[2](fn(dirty));
+            if ($$scope.dirty === undefined) {
+                return lets;
+            }
+            if (typeof lets === 'object') {
+                const merged = [];
+                const len = Math.max($$scope.dirty.length, lets.length);
+                for (let i = 0; i < len; i += 1) {
+                    merged[i] = $$scope.dirty[i] | lets[i];
+                }
+                return merged;
+            }
+            return $$scope.dirty | lets;
+        }
+        return $$scope.dirty;
+    }
+    function update_slot(slot, slot_definition, ctx, $$scope, dirty, get_slot_changes_fn, get_slot_context_fn) {
+        const slot_changes = get_slot_changes(slot_definition, $$scope, dirty, get_slot_changes_fn);
+        if (slot_changes) {
+            const slot_context = get_slot_context(slot_definition, ctx, $$scope, get_slot_context_fn);
+            slot.p(slot_context, slot_changes);
+        }
+    }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function empty() {
+        return text('');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function prevent_default(fn) {
+        return function (event) {
+            event.preventDefault();
+            // @ts-ignore
+            return fn.call(this, event);
+        };
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function set_input_value(input, value) {
+        input.value = value == null ? '' : value;
+    }
+    function set_style(node, key, value, important) {
+        node.style.setProperty(key, value, important ? 'important' : '');
+    }
+    function custom_event(type, detail) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, false, false, detail);
+        return e;
+    }
+
+    const active_docs = new Set();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = node.ownerDocument;
+        active_docs.add(doc);
+        const stylesheet = doc.__svelte_stylesheet || (doc.__svelte_stylesheet = doc.head.appendChild(element('style')).sheet);
+        const current_rules = doc.__svelte_rules || (doc.__svelte_rules = {});
+        if (!current_rules[name]) {
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ''}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            active_docs.forEach(doc => {
+                const stylesheet = doc.__svelte_stylesheet;
+                let i = stylesheet.cssRules.length;
+                while (i--)
+                    stylesheet.deleteRule(i);
+                doc.__svelte_rules = {};
+            });
+            active_docs.clear();
+        });
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+    function get_current_component() {
+        if (!current_component)
+            throw new Error('Function called outside component initialization');
+        return current_component;
+    }
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
+    }
+    function onDestroy(fn) {
+        get_current_component().$$.on_destroy.push(fn);
+    }
+    function createEventDispatcher() {
+        const component = get_current_component();
+        return (type, detail) => {
+            const callbacks = component.$$.callbacks[type];
+            if (callbacks) {
+                // TODO are there situations where events could be dispatched
+                // in a server (non-DOM) environment?
+                const event = custom_event(type, detail);
+                callbacks.slice().forEach(fn => {
+                    fn.call(component, event);
+                });
+            }
+        };
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    let flushing = false;
+    const seen_callbacks = new Set();
+    function flush() {
+        if (flushing)
+            return;
+        flushing = true;
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            for (let i = 0; i < dirty_components.length; i += 1) {
+                const component = dirty_components[i];
+                set_current_component(component);
+                update(component.$$);
+            }
+            set_current_component(null);
+            dirty_components.length = 0;
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                    callback();
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+        flushing = false;
+        seen_callbacks.clear();
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update();
+            run_all($$.before_update);
+            const dirty = $$.dirty;
+            $$.dirty = [-1];
+            $$.fragment && $$.fragment.p($$.ctx, dirty);
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_bidirectional_transition(node, fn, params, intro) {
+        let config = fn(node, params);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = program.b - t;
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program || pending_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config();
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
+    }
+
+    function handle_promise(promise, info) {
+        const token = info.token = {};
+        function update(type, index, key, value) {
+            if (info.token !== token)
+                return;
+            info.resolved = value;
+            let child_ctx = info.ctx;
+            if (key !== undefined) {
+                child_ctx = child_ctx.slice();
+                child_ctx[key] = value;
+            }
+            const block = type && (info.current = type)(child_ctx);
+            let needs_flush = false;
+            if (info.block) {
+                if (info.blocks) {
+                    info.blocks.forEach((block, i) => {
+                        if (i !== index && block) {
+                            group_outros();
+                            transition_out(block, 1, 1, () => {
+                                if (info.blocks[i] === block) {
+                                    info.blocks[i] = null;
+                                }
+                            });
+                            check_outros();
+                        }
+                    });
+                }
+                else {
+                    info.block.d(1);
+                }
+                block.c();
+                transition_in(block, 1);
+                block.m(info.mount(), info.anchor);
+                needs_flush = true;
+            }
+            info.block = block;
+            if (info.blocks)
+                info.blocks[index] = block;
+            if (needs_flush) {
+                flush();
+            }
+        }
+        if (is_promise(promise)) {
+            const current_component = get_current_component();
+            promise.then(value => {
+                set_current_component(current_component);
+                update(info.then, 1, info.value, value);
+                set_current_component(null);
+            }, error => {
+                set_current_component(current_component);
+                update(info.catch, 2, info.error, error);
+                set_current_component(null);
+                if (!info.hasCatch) {
+                    throw error;
+                }
+            });
+            // if we previously had a then/catch block, destroy it
+            if (info.current !== info.pending) {
+                update(info.pending, 0);
+                return true;
+            }
+        }
+        else {
+            if (info.current !== info.then) {
+                update(info.then, 1, info.value, promise);
+                return true;
+            }
+            info.resolved = promise;
+        }
+    }
+
+    const globals = (typeof window !== 'undefined'
+        ? window
+        : typeof globalThis !== 'undefined'
+            ? globalThis
+            : global);
+    function outro_and_destroy_block(block, lookup) {
+        transition_out(block, 1, 1, () => {
+            lookup.delete(block.key);
+        });
+    }
+    function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+        let o = old_blocks.length;
+        let n = list.length;
+        let i = o;
+        const old_indexes = {};
+        while (i--)
+            old_indexes[old_blocks[i].key] = i;
+        const new_blocks = [];
+        const new_lookup = new Map();
+        const deltas = new Map();
+        i = n;
+        while (i--) {
+            const child_ctx = get_context(ctx, list, i);
+            const key = get_key(child_ctx);
+            let block = lookup.get(key);
+            if (!block) {
+                block = create_each_block(key, child_ctx);
+                block.c();
+            }
+            else if (dynamic) {
+                block.p(child_ctx, dirty);
+            }
+            new_lookup.set(key, new_blocks[i] = block);
+            if (key in old_indexes)
+                deltas.set(key, Math.abs(i - old_indexes[key]));
+        }
+        const will_move = new Set();
+        const did_move = new Set();
+        function insert(block) {
+            transition_in(block, 1);
+            block.m(node, next);
+            lookup.set(block.key, block);
+            next = block.first;
+            n--;
+        }
+        while (o && n) {
+            const new_block = new_blocks[n - 1];
+            const old_block = old_blocks[o - 1];
+            const new_key = new_block.key;
+            const old_key = old_block.key;
+            if (new_block === old_block) {
+                // do nothing
+                next = new_block.first;
+                o--;
+                n--;
+            }
+            else if (!new_lookup.has(old_key)) {
+                // remove old block
+                destroy(old_block, lookup);
+                o--;
+            }
+            else if (!lookup.has(new_key) || will_move.has(new_key)) {
+                insert(new_block);
+            }
+            else if (did_move.has(old_key)) {
+                o--;
+            }
+            else if (deltas.get(new_key) > deltas.get(old_key)) {
+                did_move.add(new_key);
+                insert(new_block);
+            }
+            else {
+                will_move.add(old_key);
+                o--;
+            }
+        }
+        while (o--) {
+            const old_block = old_blocks[o];
+            if (!new_lookup.has(old_block.key))
+                destroy(old_block, lookup);
+        }
+        while (n)
+            insert(new_blocks[n - 1]);
+        return new_blocks;
+    }
+    function validate_each_keys(ctx, list, get_context, get_key) {
+        const keys = new Set();
+        for (let i = 0; i < list.length; i++) {
+            const key = get_key(get_context(ctx, list, i));
+            if (keys.has(key)) {
+                throw new Error('Cannot have duplicate keys in a keyed each');
+            }
+            keys.add(key);
+        }
+    }
+    function create_component(block) {
+        block && block.c();
+    }
+    function mount_component(component, target, anchor) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        // onMount happens before the initial afterUpdate
+        add_render_callback(() => {
+            const new_on_destroy = on_mount.map(run).filter(is_function);
+            if (on_destroy) {
+                on_destroy.push(...new_on_destroy);
+            }
+            else {
+                // Edge case - component was destroyed immediately,
+                // most likely as a result of a binding initialising
+                run_all(new_on_destroy);
+            }
+            component.$$.on_mount = [];
+        });
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = [];
+        }
+    }
+    function make_dirty(component, i) {
+        if (component.$$.dirty[0] === -1) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty.fill(0);
+        }
+        component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+    }
+    function init(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const prop_values = options.props || {};
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(parent_component ? parent_component.$$.context : []),
+            // everything else
+            callbacks: blank_object(),
+            dirty,
+            skip_bound: false
+        };
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, prop_values, (i, ret, ...rest) => {
+                const value = rest.length ? rest[0] : ret;
+                if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                    if (!$$.skip_bound && $$.bound[i])
+                        $$.bound[i](value);
+                    if (ready)
+                        make_dirty(component, i);
+                }
+                return ret;
+            })
+            : [];
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                const nodes = children(options.target);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(nodes);
+                nodes.forEach(detach);
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    /**
+     * Base class for Svelte components. Used when dev=false.
+     */
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set($$props) {
+            if (this.$$set && !is_empty($$props)) {
+                this.$$.skip_bound = true;
+                this.$$set($$props);
+                this.$$.skip_bound = false;
+            }
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.32.0' }, detail)));
+    }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev('SvelteDOMInsert', { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev('SvelteDOMRemove', { node });
+        detach(node);
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+        else
+            dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function prop_dev(node, property, value) {
+        node[property] = value;
+        dispatch_dev('SvelteDOMSetProperty', { node, property, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
+    function validate_each_argument(arg) {
+        if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
+            let msg = '{#each} only iterates over array-like objects.';
+            if (typeof Symbol === 'function' && arg && Symbol.iterator in arg) {
+                msg += ' You can use a spread to convert this iterable into an array.';
+            }
+            throw new Error(msg);
+        }
+    }
+    function validate_slots(name, slot, keys) {
+        for (const slot_key of Object.keys(slot)) {
+            if (!~keys.indexOf(slot_key)) {
+                console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+            }
+        }
+    }
+    /**
+     * Base class for Svelte components with some minor dev-enhancements. Used when dev=true.
+     */
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error("'target' is a required option");
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn('Component was already destroyed'); // eslint-disable-line no-console
+            };
+        }
+        $capture_state() { }
+        $inject_state() { }
+    }
+
+    /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
 
     Permission to use, copy, modify, and/or distribute this software for any
@@ -12,5 +881,2347 @@ var app=function(){"use strict";function e(){}const t=e=>e;function n(e){return 
     LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */function ce(e,t,n,r){return new(n||(n=Promise))((function(o,i){function s(e){try{c(r.next(e))}catch(e){i(e)}}function l(e){try{c(r.throw(e))}catch(e){i(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(s,l)}c((r=r.apply(e,t||[])).next())}))}function ae(e,t){var n,r,o,i,s={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return i={next:l(0),throw:l(1),return:l(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function l(i){return function(l){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;s;)try{if(n=1,r&&(o=2&i[0]?r.return:i[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,i[1])).done)return o;switch(r=0,o&&(i=[2&i[0],o.value]),i[0]){case 0:case 1:o=i;break;case 4:return s.label++,{value:i[1],done:!1};case 5:s.label++,r=i[1],i=[0];continue;case 7:i=s.ops.pop(),s.trys.pop();continue;default:if(!(o=s.trys,(o=o.length>0&&o[o.length-1])||6!==i[0]&&2!==i[0])){s=0;continue}if(3===i[0]&&(!o||i[1]>o[0]&&i[1]<o[3])){s.label=i[1];break}if(6===i[0]&&s.label<o[1]){s.label=o[1],o=i;break}if(o&&s.label<o[2]){s.label=o[2],s.ops.push(i);break}o[2]&&s.ops.pop(),s.trys.pop();continue}i=t.call(e,s)}catch(e){i=[6,e],r=0}finally{n=o=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,l])}}}function ue(e,t){var n="function"==typeof Symbol&&e[Symbol.iterator];if(!n)return e;var r,o,i=n.call(e),s=[];try{for(;(void 0===t||t-- >0)&&!(r=i.next()).done;)s.push(r.value)}catch(e){o={error:e}}finally{try{r&&!r.done&&(n=i.return)&&n.call(i)}finally{if(o)throw o.error}}return s}var fe=new Map([["avi","video/avi"],["gif","image/gif"],["ico","image/x-icon"],["jpeg","image/jpeg"],["jpg","image/jpeg"],["mkv","video/x-matroska"],["mov","video/quicktime"],["mp4","video/mp4"],["pdf","application/pdf"],["png","image/png"],["zip","application/zip"],["doc","application/msword"],["docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document"]]);function de(e,t){var n=function(e){var t=e.name;if(t&&-1!==t.lastIndexOf(".")&&!e.type){var n=t.split(".").pop().toLowerCase(),r=fe.get(n);r&&Object.defineProperty(e,"type",{value:r,writable:!1,configurable:!1,enumerable:!0})}return e}(e);if("string"!=typeof n.path){var r=e.webkitRelativePath;Object.defineProperty(n,"path",{value:"string"==typeof t?t:"string"==typeof r&&r.length>0?r:e.name,writable:!1,configurable:!1,enumerable:!0})}return n}var pe=[".DS_Store","Thumbs.db"];function he(e){return ce(this,void 0,void 0,(function(){return ae(this,(function(t){return[2,(n=e,n.dataTransfer&&e.dataTransfer?me(e.dataTransfer,e.type):ge(e))];var n}))}))}function ge(e){return(null!==e.target&&e.target.files?ye(e.target.files):[]).map((function(e){return de(e)}))}function me(e,t){return ce(this,void 0,void 0,(function(){var n;return ae(this,(function(r){switch(r.label){case 0:return e.items?(n=ye(e.items).filter((function(e){return"file"===e.kind})),"drop"!==t?[2,n]:[4,Promise.all(n.map(be))]):[3,2];case 1:return[2,ve($e(r.sent()))];case 2:return[2,ve(ye(e.files).map((function(e){return de(e)})))]}}))}))}function ve(e){return e.filter((function(e){return-1===pe.indexOf(e.name)}))}function ye(e){for(var t=[],n=0;n<e.length;n++){var r=e[n];t.push(r)}return t}function be(e){if("function"!=typeof e.webkitGetAsEntry)return ke(e);var t=e.webkitGetAsEntry();return t&&t.isDirectory?xe(t):ke(e)}function $e(e){return e.reduce((function(e,t){return function(){for(var e=[],t=0;t<arguments.length;t++)e=e.concat(ue(arguments[t]));return e}(e,Array.isArray(t)?$e(t):[t])}),[])}function ke(e){var t=e.getAsFile();if(!t)return Promise.reject(e+" is not a File");var n=de(t);return Promise.resolve(n)}function we(e){return ce(this,void 0,void 0,(function(){return ae(this,(function(t){return[2,e.isDirectory?xe(e):_e(e)]}))}))}function xe(e){var t=e.createReader();return new Promise((function(e,n){var r=[];!function o(){var i=this;t.readEntries((function(t){return ce(i,void 0,void 0,(function(){var i,s,l;return ae(this,(function(c){switch(c.label){case 0:if(t.length)return[3,5];c.label=1;case 1:return c.trys.push([1,3,,4]),[4,Promise.all(r)];case 2:return i=c.sent(),e(i),[3,4];case 3:return s=c.sent(),n(s),[3,4];case 4:return[3,6];case 5:l=Promise.all(t.map(we)),r.push(l),o(),c.label=6;case 6:return[2]}}))}))}),(function(e){n(e)}))}()}))}function _e(e){return ce(this,void 0,void 0,(function(){return ae(this,(function(t){return[2,new Promise((function(t,n){e.file((function(n){var r=de(n,e.fullPath);t(r)}),(function(e){n(e)}))}))]}))}))}const De=e=>{e=Array.isArray(e)&&1===e.length?e[0]:e;return{code:"file-invalid-type",message:`File type must be ${Array.isArray(e)?`one of ${e.join(", ")}`:e}`}},Ee=e=>({code:"file-too-large",message:`File is larger than ${e} bytes`}),Se=e=>({code:"file-too-small",message:`File is smaller than ${e} bytes`}),Fe={code:"too-many-files",message:"Too many files"};function Ae(e,t){const n="application/x-moz-file"===e.type||function(e,t){if(e&&t){const n=Array.isArray(t)?t:t.split(","),r=e.name||"",o=(e.type||"").toLowerCase(),i=o.replace(/\/.*$/,"");return n.some((e=>{const t=e.trim().toLowerCase();return"."===t.charAt(0)?r.toLowerCase().endsWith(t):t.endsWith("/*")?i===t.replace(/\/.*$/,""):o===t}))}return!0}(e,t);return[n,n?null:De(t)]}function Ce(e){return null!=e}function Pe(e){return"function"==typeof e.isPropagationStopped?e.isPropagationStopped():void 0!==e.cancelBubble&&e.cancelBubble}function je(e){return e.dataTransfer?Array.prototype.some.call(e.dataTransfer.types,(e=>"Files"===e||"application/x-moz-file"===e)):!!e.target&&!!e.target.files}function Oe(e){e.preventDefault()}function ze(e){let t,n,r,i,s,l,c;const f=e[28].default,d=function(e,t,n,r){if(e){const o=a(e,t,n,r);return e[0](o)}}(f,e,e[27],null),p=d||function(e){let t;return{c(){t=b("p"),t.textContent="Drag 'n' drop some files here, or click to select files"},m(e,n){v(e,t,n)},d(e){e&&y(t)}}}();return{c(){var o,s,l;t=b("div"),n=b("input"),r=k(),p&&p.c(),_(n,"accept",e[0]),n.multiple=e[1],_(n,"type","file"),_(n,"autocomplete","off"),_(n,"tabindex","-1"),o="display",s="none",n.style.setProperty(o,s,l?"important":""),_(t,"tabindex","0"),_(t,"class",i=(e[4]?"":"dropzone")+"\r\n  "+e[2]+" svelte-817dg2"),_(t,"style",e[3])},m(o,i){v(o,t,i),m(t,n),e[29](n),m(t,r),p&&p.m(t,null),e[30](t),s=!0,l||(c=[x(n,"change",e[14]),x(n,"click",Te),x(t,"keydown",e[16](e[7])),x(t,"focus",e[16](e[8])),x(t,"blur",e[16](e[9])),x(t,"click",e[15](e[10])),x(t,"dragenter",e[17](e[11])),x(t,"dragover",e[17](e[12])),x(t,"dragleave",e[17](e[13])),x(t,"drop",e[17](e[14]))],l=!0)},p(e,r){(!s||1&r[0])&&_(n,"accept",e[0]),(!s||2&r[0])&&(n.multiple=e[1]),d&&d.p&&134217728&r[0]&&u(d,f,e,e[27],r,null,null),(!s||20&r[0]&&i!==(i=(e[4]?"":"dropzone")+"\r\n  "+e[2]+" svelte-817dg2"))&&_(t,"class",i),(!s||8&r[0])&&_(t,"style",e[3])},i(e){s||(X(p,e),s=!0)},o(e){Y(p,e),s=!1},d(n){n&&y(t),e[29](null),p&&p.d(n),e[30](null),l=!1,o(c)}}}function Te(e){e.stopPropagation()}function Le(e,t,n){let{$$slots:r={},$$scope:o}=t,{accept:i}=t,{disabled:s=!1}=t,{getFilesFromEvent:l=he}=t,{maxSize:c=1/0}=t,{minSize:a=0}=t,{multiple:u=!0}=t,{preventDropOnDocument:f=!0}=t,{noClick:d=!1}=t,{noKeyboard:p=!1}=t,{noDrag:h=!1}=t,{noDragEventsBubbling:g=!1}=t,{containerClasses:m=""}=t,{containerStyles:v=""}=t,{disableDefaultStyles:y=!1}=t;const b=function(){const e=O();return(t,n)=>{const r=e.$$.callbacks[t];if(r){const o=E(t,n);r.slice().forEach((t=>{t.call(e,o)}))}}}();let $,k,w={isFocused:!1,isFileDialogActive:!1,isDragActive:!1,isDragAccept:!1,isDragReject:!1,draggedFiles:[],acceptedFiles:[],fileRejections:[]};function x(){k&&(n(6,k.value=null,k),w.isFileDialogActive=!0,k.click())}function _(e){return s?null:e}function D(e){g&&e.stopPropagation()}let S=[];function F(e){$&&$.contains(e.target)||(e.preventDefault(),S=[])}function A(){w.isFileDialogActive&&setTimeout((()=>{if(k){const{files:e}=k;e.length||(w.isFileDialogActive=!1,b("filedialogcancel"))}}),300)}var C;return C=()=>{window.addEventListener("focus",A,!1),f&&(document.addEventListener("dragover",Oe,!1),document.addEventListener("drop",F,!1))},O().$$.on_mount.push(C),function(e){O().$$.on_destroy.push(e)}((()=>{window.removeEventListener("focus",A,!1),f&&(document.removeEventListener("dragover",Oe),document.removeEventListener("drop",F))})),e.$$set=e=>{"accept"in e&&n(0,i=e.accept),"disabled"in e&&n(18,s=e.disabled),"getFilesFromEvent"in e&&n(19,l=e.getFilesFromEvent),"maxSize"in e&&n(20,c=e.maxSize),"minSize"in e&&n(21,a=e.minSize),"multiple"in e&&n(1,u=e.multiple),"preventDropOnDocument"in e&&n(22,f=e.preventDropOnDocument),"noClick"in e&&n(23,d=e.noClick),"noKeyboard"in e&&n(24,p=e.noKeyboard),"noDrag"in e&&n(25,h=e.noDrag),"noDragEventsBubbling"in e&&n(26,g=e.noDragEventsBubbling),"containerClasses"in e&&n(2,m=e.containerClasses),"containerStyles"in e&&n(3,v=e.containerStyles),"disableDefaultStyles"in e&&n(4,y=e.disableDefaultStyles),"$$scope"in e&&n(27,o=e.$$scope)},[i,u,m,v,y,$,k,function(e){$&&$.isEqualNode(e.target)&&(32!==e.keyCode&&13!==e.keyCode||(e.preventDefault(),x()))},function(){w.isFocused=!0},function(){w.isFocused=!1},function(){d||(!function(e=window.navigator.userAgent){return function(e){return-1!==e.indexOf("MSIE")||-1!==e.indexOf("Trident/")}(e)||function(e){return-1!==e.indexOf("Edge/")}(e)}()?x():setTimeout(x,0))},function(e){e.preventDefault(),D(e),S=[...S,e.target],je(e)&&Promise.resolve(l(e)).then((t=>{Pe(e)&&!g||(w.draggedFiles=t,w.isDragActive=!0,b("dragenter",{dragEvent:e}))}))},function(e){if(e.preventDefault(),D(e),e.dataTransfer)try{e.dataTransfer.dropEffect="copy"}catch{}return je(e)&&b("dragover",{dragEvent:e}),!1},function(e){e.preventDefault(),D(e);const t=S.filter((e=>$&&$.contains(e))),n=t.indexOf(e.target);-1!==n&&t.splice(n,1),S=t,t.length>0||(w.isDragActive=!1,w.draggedFiles=[],je(e)&&b("dragleave",{dragEvent:e}))},function(e){e.preventDefault(),D(e),S=[],je(e)&&Promise.resolve(l(e)).then((t=>{if(Pe(e)&&!g)return;const n=[],r=[];t.forEach((e=>{const[t,o]=Ae(e,i),[s,l]=function(e,t,n){if(Ce(e.size))if(Ce(t)&&Ce(n)){if(e.size>n)return[!1,Ee(n)];if(e.size<t)return[!1,Se(t)]}else{if(Ce(t)&&e.size<t)return[!1,Se(t)];if(Ce(n)&&e.size>n)return[!1,Ee(n)]}return[!0,null]}(e,a,c);if(t&&s)n.push(e);else{const t=[o,l].filter((e=>e));r.push({file:e,errors:t})}})),!u&&n.length>1&&(n.forEach((e=>{r.push({file:e,errors:[Fe]})})),n.splice(0)),w.acceptedFiles=n,w.fileRejections=r,b("drop",{acceptedFiles:n,fileRejections:r,event:e}),r.length>0&&b("droprejected",{fileRejections:r,event:e}),n.length>0&&b("dropaccepted",{acceptedFiles:n,event:e})})),w.isFileDialogActive=!1,w.isDragActive=!1,w.draggedFiles=[],w.acceptedFiles=[],w.fileRejections=[]},_,function(e){return p?null:_(e)},function(e){return h?null:_(e)},s,l,c,a,f,d,p,h,g,o,r,function(e){T[e?"unshift":"push"]((()=>{k=e,n(6,k)}))},function(e){T[e?"unshift":"push"]((()=>{$=e,n(5,$)}))}]}class Re extends le{constructor(e){super(),se(this,e,Le,ze,s,{accept:0,disabled:18,getFilesFromEvent:19,maxSize:20,minSize:21,multiple:1,preventDropOnDocument:22,noClick:23,noKeyboard:24,noDrag:25,noDragEventsBubbling:26,containerClasses:2,containerStyles:3,disableDefaultStyles:4},[-1,-1])}}const Me=[];class Ne{constructor(){this.reset()}reset(){this.value=0,this.n=0}append(e,t=1){if(0==this.n)this.n=1,this.value=e;else{if(this.value.length!=e.length)throw new Error("New value has different len from current value");for(let n=0;n<this.value.length;n++)this.value[n]=(this.value[n]*this.n+e[n]*t)/(this.n+t);this.n+=1}}result(e){return 0==this.n?0:this.value[e]}}const qe=function(){const{subscribe:t,set:n,update:r}=function(t,n=e){let r;const o=[];function i(e){if(s(t,e)&&(t=e,r)){const e=!Me.length;for(let e=0;e<o.length;e+=1){const n=o[e];n[1](),Me.push(n,t)}if(e){for(let e=0;e<Me.length;e+=2)Me[e][0](Me[e+1]);Me.length=0}}}return{set:i,update:function(e){i(e(t))},subscribe:function(s,l=e){const c=[s,l];return o.push(c),1===o.length&&(r=n(i)||e),s(t),()=>{const e=o.indexOf(c);-1!==e&&o.splice(e,1),0===o.length&&(r(),r=null)}}}}(),o=new Ne,i=new Ne,l=new Set;return{subscribe:t,resetQuery:e=>{l.clear(),o.reset(),i.reset(),n(e)},appendQuery:async(e,t,r)=>{r>0?o.append(t,r):i.append(t,-r),l.add(e);let s=await c(qe);for(let e=0;e<s.length;e++)s[e]=.25*s[e]+.75*(o.result(e)-.8*i.result(e))/(1-.8);return n(s),s},getImageList:()=>l}}();function Be(e,{delay:n=0,duration:r=400,easing:o=t}){const i=+getComputedStyle(e).opacity;return{delay:n,duration:r,easing:o,css:e=>"opacity: "+e*i}}function Ie(e,t,n){const r=e.slice();return r[18]=t[n],r}function Ke(e,t,n){const r=e.slice();return r[21]=t[n],r}function Qe(t){let n,r,i,s,l,c,a,u,f={ctx:t,current:null,token:null,hasCatch:!1,pending:We,then:Je,catch:Ge};return te(c=t[4],f),{c(){n=b("h1"),n.textContent="CLIP-Search",r=k(),i=b("input"),s=k(),l=w(),f.block.c(),_(n,"class","svelte-uhug7k"),_(i,"placeholder","Type a text or drag images here"),_(i,"class","search-box svelte-uhug7k")},m(e,o){v(e,n,o),v(e,r,o),v(e,i,o),D(i,t[1]),v(e,s,o),v(e,l,o),f.block.m(e,f.anchor=o),f.mount=()=>l.parentNode,f.anchor=l,a||(u=[x(i,"input",t[12]),x(i,"keyup",t[8])],a=!0)},p(e,n){if(t=e,2&n&&i.value!==t[1]&&D(i,t[1]),f.ctx=t,16&n&&c!==(c=t[4])&&te(c,f));else{const e=t.slice();f.block.p(e,n)}},i:e,o:e,d(e){e&&y(n),e&&y(r),e&&y(i),e&&y(s),e&&y(l),f.block.d(e),f.token=null,f=null,a=!1,o(u)}}}function Ue(t){let n,r;return n=new Re({props:{accept:"image/*",multiple:!0}}),n.$on("dropaccepted",t[6]),{c(){var e;(e=n.$$.fragment)&&e.c()},m(e,t){re(n,e,t),r=!0},p:e,i(e){r||(X(n.$$.fragment,e),r=!0)},o(e){Y(n.$$.fragment,e),r=!1},d(e){oe(n,e)}}}function Ge(t){return{c:e,m:e,p:e,d:e}}function Je(e){let t,n,r,o,i;return{c(){t=b("button"),n=$("Search"),_(t,"class","btn-search svelte-uhug7k"),t.disabled=r=0==e[1].length},m(r,s){v(r,t,s),m(t,n),o||(i=x(t,"click",e[7]),o=!0)},p(e,n){2&n&&r!==(r=0==e[1].length)&&(t.disabled=r)},d(e){e&&y(t),o=!1,i()}}}function We(t){let n;return{c(){n=b("button"),n.textContent="Searching...",_(n,"class","btn-search svelte-uhug7k"),n.disabled="disabled"},m(e,t){v(e,n,t)},p:e,d(e){e&&y(n)}}}function He(e){let t,n;function r(e,t){return e[5].length>0?Xe:Ve}let o=r(e),i=o(e);return{c(){t=b("p"),n=$("Search results for:\n            "),i.c()},m(e,r){v(e,t,r),m(t,n),i.m(t,null)},p(e,n){o===(o=r(e))&&i?i.p(e,n):(i.d(1),i=o(e),i&&(i.c(),i.m(t,null)))},d(e){e&&y(t),i.d()}}}function Ve(e){let t;return{c(){t=$(e[2])},m(e,n){v(e,t,n)},p(e,n){4&n&&function(e,t){t=""+t,e.wholeText!==t&&(e.data=t)}(t,e[2])},d(e){e&&y(t)}}}function Xe(e){let t,n=e[5],r=[];for(let t=0;t<n.length;t+=1)r[t]=Ye(Ke(e,n,t));return{c(){for(let e=0;e<r.length;e+=1)r[e].c();t=w()},m(e,n){for(let t=0;t<r.length;t+=1)r[t].m(e,n);v(e,t,n)},p(e,o){if(32&o){let i;for(n=e[5],i=0;i<n.length;i+=1){const s=Ke(e,n,i);r[i]?r[i].p(s,o):(r[i]=Ye(s),r[i].c(),r[i].m(t.parentNode,t))}for(;i<r.length;i+=1)r[i].d(1);r.length=n.length}},d(e){!function(e,t){for(let n=0;n<e.length;n+=1)e[n]&&e[n].d(t)}(r,e),e&&y(t)}}}function Ye(e){let t,n;return{c(){t=b("img"),t.src!==(n=e[21].src)&&_(t,"src",n),_(t,"alt","search image"),_(t,"class","search-images svelte-uhug7k")},m(e,n){v(e,t,n)},p(e,r){32&r&&t.src!==(n=e[21].src)&&_(t,"src",n)},d(e){e&&y(t)}}}function Ze(e,t){let n,r,s,l,c,a,u,f,d,p,h,g,$,w,D;return{key:e,first:null,c(){n=b("div"),r=b("button"),r.textContent="More like this",s=k(),l=b("button"),l.textContent="Less like this",c=k(),a=b("a"),u=b("img"),h=k(),_(r,"class","svelte-uhug7k"),_(l,"class","svelte-uhug7k"),u.src!==(f=t[18].thumb)&&_(u,"src",f),_(u,"alt",d=t[18].thumb),_(u,"class","svelte-uhug7k"),_(a,"href",p=t[18].fname),_(a,"target","_blank"),_(n,"class","result svelte-uhug7k"),this.first=n},m(e,o){v(e,n,o),m(n,r),m(n,s),m(n,l),m(n,c),m(n,a),m(a,u),m(n,h),$=!0,w||(D=[x(r,"click",(function(){i(t[11](t[18],1))&&t[11](t[18],1).apply(this,arguments)})),x(l,"click",(function(){i(t[11](t[18],-1))&&t[11](t[18],-1).apply(this,arguments)}))],w=!0)},p(e,n){t=e,(!$||8&n&&u.src!==(f=t[18].thumb))&&_(u,"src",f),(!$||8&n&&d!==(d=t[18].thumb))&&_(u,"alt",d),(!$||8&n&&p!==(p=t[18].fname))&&_(a,"href",p)},i(e){$||(e&&q((()=>{g||(g=ee(n,Be,{},!0)),g.run(1)})),$=!0)},o(e){e&&(g||(g=ee(n,Be,{},!1)),g.run(0)),$=!1},d(e){e&&y(n),e&&g&&g.end(),w=!1,o(D)}}}function et(e){let t,n,r,i,s,l,c,a,u,f,d,p,h,g,$,w,D=[],E=new Map;const S=[Ue,Qe],F=[];function A(e,t){return e[0]?0:1}l=A(e),c=F[l]=S[l](e);let C=e[3].length>0&&He(e),P=e[3];const j=e=>e[18].fname;for(let t=0;t<P.length;t+=1){let n=Ie(e,P,t),r=j(n);E.set(r,D[t]=Ze(r,n))}return{c(){t=b("div"),n=b("div"),r=b("div"),i=k(),s=b("div"),c.c(),a=k(),u=b("div"),f=k(),d=b("div"),C&&C.c(),p=k(),h=b("div");for(let e=0;e<D.length;e+=1)D[e].c();_(r,"class","positives svelte-uhug7k"),_(s,"class","search-area svelte-uhug7k"),_(u,"class","negatives svelte-uhug7k"),_(n,"class","header svelte-uhug7k"),_(d,"class","search-query svelte-uhug7k"),_(h,"class","results svelte-uhug7k"),_(t,"class","content")},m(o,c){v(o,t,c),m(t,n),m(n,r),m(n,i),m(n,s),F[l].m(s,null),m(n,a),m(n,u),m(t,f),m(t,d),C&&C.m(d,null),m(t,p),m(t,h);for(let e=0;e<D.length;e+=1)D[e].m(h,null);var y;g=!0,$||(w=[x(s,"dragenter",(y=e[9],function(e){return e.preventDefault(),y.call(this,e)})),x(s,"dragleave",e[10])],$=!0)},p(e,[t]){let n=l;l=A(e),l===n?F[l].p(e,t):(H(),Y(F[n],1,1,(()=>{F[n]=null})),V(),c=F[l],c?c.p(e,t):(c=F[l]=S[l](e),c.c()),X(c,1),c.m(s,null)),e[3].length>0?C?C.p(e,t):(C=He(e),C.c(),C.m(d,null)):C&&(C.d(1),C=null),2056&t&&(P=e[3],H(),D=function(e,t,n,r,o,i,s,l,c,a,u,f){let d=e.length,p=i.length,h=d;const g={};for(;h--;)g[e[h].key]=h;const m=[],v=new Map,y=new Map;for(h=p;h--;){const e=f(o,i,h),l=n(e);let c=s.get(l);c?r&&c.p(e,t):(c=a(l,e),c.c()),v.set(l,m[h]=c),l in g&&y.set(l,Math.abs(h-g[l]))}const b=new Set,$=new Set;function k(e){X(e,1),e.m(l,u),s.set(e.key,e),u=e.first,p--}for(;d&&p;){const t=m[p-1],n=e[d-1],r=t.key,o=n.key;t===n?(u=t.first,d--,p--):v.has(o)?!s.has(r)||b.has(r)?k(t):$.has(o)?d--:y.get(r)>y.get(o)?($.add(r),k(t)):(b.add(o),d--):(c(n,s),d--)}for(;d--;){const t=e[d];v.has(t.key)||c(t,s)}for(;p;)k(m[p-1]);return m}(D,t,j,1,e,P,E,h,ne,Ze,null,Ie),V())},i(e){if(!g){X(c);for(let e=0;e<P.length;e+=1)X(D[e]);g=!0}},o(e){Y(c);for(let e=0;e<D.length;e+=1)Y(D[e]);g=!1},d(e){e&&y(t),F[l].d(),C&&C.d();for(let e=0;e<D.length;e+=1)D[e].d();$=!1,o(w)}}}async function tt(e,t={}){return fetch(e,t).then((e=>e.json()))}function nt(e,t,n){let r;var o,i;o=qe,i=e=>n(13,r=e),e.$$.on_destroy.push(l(o,i));let s=!1,c="",a="",u=[],f=Promise.all([]),d=[];const p=async e=>{qe.resetQuery(e);let t={query:r};n(3,u=await tt("/search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)}))},h=async e=>{var t=new URL("/get-embedding",document.location);n(5,d=[]),t.searchParams.append("prompt",c),n(2,a=c),n(4,f=tt(t).then((e=>p(e))))};return[s,c,a,u,f,d,async e=>{const{acceptedFiles:t}=e.detail;let r=new FormData;n(5,d=[]);for(let e=0;e<t.length;e++)r.append("fileToUpload[]",t[e]),o=t[e],i=void 0,(i=new FileReader).onload=function(e){let t=new Object;t.src=e.target.result,n(5,d=[...d,t])},i.readAsDataURL(o);var o,i;n(4,f=tt("/get-embedding",{method:"POST",body:r}).then((e=>{n(1,c=""),n(2,a=""),n(0,s=!1);let t=e._mean_;return p(t)})))},h,e=>{if("Enter"==e.code||"NumpadEnter"==e.code)return e.preventDefault(),h()},e=>{n(0,s=!0)},e=>{n(0,s=!1)},async(e,t)=>{let r=await(async e=>{var t=new URL("/get-embedding",document.location);return t.searchParams.append("src_image",e),tt(t)})(e.fname),o={query:await qe.appendQuery(e.fname,r,t),query_excludes:Array.from(qe.getImageList())};n(3,u=await tt("/search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)}))},function(){c=this.value,n(1,c)}]}return new class extends le{constructor(e){super(),se(this,e,nt,et,s,{})}}({target:document.body,props:{name:"world"}})}();
+    ***************************************************************************** */
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+        }
+        catch (error) { e = { error: error }; }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"])) m.call(i);
+            }
+            finally { if (e) throw e.error; }
+        }
+        return ar;
+    }
+
+    /** @deprecated */
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+
+    var COMMON_MIME_TYPES = new Map([
+        ['avi', 'video/avi'],
+        ['gif', 'image/gif'],
+        ['ico', 'image/x-icon'],
+        ['jpeg', 'image/jpeg'],
+        ['jpg', 'image/jpeg'],
+        ['mkv', 'video/x-matroska'],
+        ['mov', 'video/quicktime'],
+        ['mp4', 'video/mp4'],
+        ['pdf', 'application/pdf'],
+        ['png', 'image/png'],
+        ['zip', 'application/zip'],
+        ['doc', 'application/msword'],
+        ['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+    ]);
+    function toFileWithPath(file, path) {
+        var f = withMimeType(file);
+        if (typeof f.path !== 'string') { // on electron, path is already set to the absolute path
+            var webkitRelativePath = file.webkitRelativePath;
+            Object.defineProperty(f, 'path', {
+                value: typeof path === 'string'
+                    ? path
+                    // If <input webkitdirectory> is set,
+                    // the File will have a {webkitRelativePath} property
+                    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory
+                    : typeof webkitRelativePath === 'string' && webkitRelativePath.length > 0
+                        ? webkitRelativePath
+                        : file.name,
+                writable: false,
+                configurable: false,
+                enumerable: true
+            });
+        }
+        return f;
+    }
+    function withMimeType(file) {
+        var name = file.name;
+        var hasExtension = name && name.lastIndexOf('.') !== -1;
+        if (hasExtension && !file.type) {
+            var ext = name.split('.')
+                .pop().toLowerCase();
+            var type = COMMON_MIME_TYPES.get(ext);
+            if (type) {
+                Object.defineProperty(file, 'type', {
+                    value: type,
+                    writable: false,
+                    configurable: false,
+                    enumerable: true
+                });
+            }
+        }
+        return file;
+    }
+
+    var FILES_TO_IGNORE = [
+        // Thumbnail cache files for macOS and Windows
+        '.DS_Store',
+        'Thumbs.db' // Windows
+    ];
+    /**
+     * Convert a DragEvent's DataTrasfer object to a list of File objects
+     * NOTE: If some of the items are folders,
+     * everything will be flattened and placed in the same list but the paths will be kept as a {path} property.
+     * @param evt
+     */
+    function fromEvent(evt) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, isDragEvt(evt) && evt.dataTransfer
+                        ? getDataTransferFiles(evt.dataTransfer, evt.type)
+                        : getInputFiles(evt)];
+            });
+        });
+    }
+    function isDragEvt(value) {
+        return !!value.dataTransfer;
+    }
+    function getInputFiles(evt) {
+        var files = isInput(evt.target)
+            ? evt.target.files
+                ? fromList(evt.target.files)
+                : []
+            : [];
+        return files.map(function (file) { return toFileWithPath(file); });
+    }
+    function isInput(value) {
+        return value !== null;
+    }
+    function getDataTransferFiles(dt, type) {
+        return __awaiter(this, void 0, void 0, function () {
+            var items, files;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!dt.items) return [3 /*break*/, 2];
+                        items = fromList(dt.items)
+                            .filter(function (item) { return item.kind === 'file'; });
+                        // According to https://html.spec.whatwg.org/multipage/dnd.html#dndevents,
+                        // only 'dragstart' and 'drop' has access to the data (source node)
+                        if (type !== 'drop') {
+                            return [2 /*return*/, items];
+                        }
+                        return [4 /*yield*/, Promise.all(items.map(toFilePromises))];
+                    case 1:
+                        files = _a.sent();
+                        return [2 /*return*/, noIgnoredFiles(flatten(files))];
+                    case 2: return [2 /*return*/, noIgnoredFiles(fromList(dt.files)
+                            .map(function (file) { return toFileWithPath(file); }))];
+                }
+            });
+        });
+    }
+    function noIgnoredFiles(files) {
+        return files.filter(function (file) { return FILES_TO_IGNORE.indexOf(file.name) === -1; });
+    }
+    // IE11 does not support Array.from()
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Browser_compatibility
+    // https://developer.mozilla.org/en-US/docs/Web/API/FileList
+    // https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItemList
+    function fromList(items) {
+        var files = [];
+        // tslint:disable: prefer-for-of
+        for (var i = 0; i < items.length; i++) {
+            var file = items[i];
+            files.push(file);
+        }
+        return files;
+    }
+    // https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem
+    function toFilePromises(item) {
+        if (typeof item.webkitGetAsEntry !== 'function') {
+            return fromDataTransferItem(item);
+        }
+        var entry = item.webkitGetAsEntry();
+        // Safari supports dropping an image node from a different window and can be retrieved using
+        // the DataTransferItem.getAsFile() API
+        // NOTE: FileSystemEntry.file() throws if trying to get the file
+        if (entry && entry.isDirectory) {
+            return fromDirEntry(entry);
+        }
+        return fromDataTransferItem(item);
+    }
+    function flatten(items) {
+        return items.reduce(function (acc, files) { return __spread(acc, (Array.isArray(files) ? flatten(files) : [files])); }, []);
+    }
+    function fromDataTransferItem(item) {
+        var file = item.getAsFile();
+        if (!file) {
+            return Promise.reject(item + " is not a File");
+        }
+        var fwp = toFileWithPath(file);
+        return Promise.resolve(fwp);
+    }
+    // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry
+    function fromEntry(entry) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, entry.isDirectory ? fromDirEntry(entry) : fromFileEntry(entry)];
+            });
+        });
+    }
+    // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry
+    function fromDirEntry(entry) {
+        var reader = entry.createReader();
+        return new Promise(function (resolve, reject) {
+            var entries = [];
+            function readEntries() {
+                var _this = this;
+                // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/createReader
+                // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryReader/readEntries
+                reader.readEntries(function (batch) { return __awaiter(_this, void 0, void 0, function () {
+                    var files, err_1, items;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!!batch.length) return [3 /*break*/, 5];
+                                _a.label = 1;
+                            case 1:
+                                _a.trys.push([1, 3, , 4]);
+                                return [4 /*yield*/, Promise.all(entries)];
+                            case 2:
+                                files = _a.sent();
+                                resolve(files);
+                                return [3 /*break*/, 4];
+                            case 3:
+                                err_1 = _a.sent();
+                                reject(err_1);
+                                return [3 /*break*/, 4];
+                            case 4: return [3 /*break*/, 6];
+                            case 5:
+                                items = Promise.all(batch.map(fromEntry));
+                                entries.push(items);
+                                // Continue reading
+                                readEntries();
+                                _a.label = 6;
+                            case 6: return [2 /*return*/];
+                        }
+                    });
+                }); }, function (err) {
+                    reject(err);
+                });
+            }
+            readEntries();
+        });
+    }
+    // https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry
+    function fromFileEntry(entry) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        entry.file(function (file) {
+                            var fwp = toFileWithPath(file, entry.fullPath);
+                            resolve(fwp);
+                        }, function (err) {
+                            reject(err);
+                        });
+                    })];
+            });
+        });
+    }
+
+    /**
+     * Check if the provided file type should be accepted by the input with accept attribute.
+     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#attr-accept
+     *
+     * Inspired by https://github.com/enyo/dropzone
+     *
+     * @param file {File} https://developer.mozilla.org/en-US/docs/Web/API/File
+     * @param acceptedFiles {string}
+     * @returns {boolean}
+     */
+
+    function accepts(file, acceptedFiles) {
+      if (file && acceptedFiles) {
+        const acceptedFilesArray = Array.isArray(acceptedFiles)
+          ? acceptedFiles
+          : acceptedFiles.split(",");
+        const fileName = file.name || "";
+        const mimeType = (file.type || "").toLowerCase();
+        const baseMimeType = mimeType.replace(/\/.*$/, "");
+
+        return acceptedFilesArray.some((type) => {
+          const validType = type.trim().toLowerCase();
+          if (validType.charAt(0) === ".") {
+            return fileName.toLowerCase().endsWith(validType);
+          } else if (validType.endsWith("/*")) {
+            // This is something like a image/* mime type
+            return baseMimeType === validType.replace(/\/.*$/, "");
+          }
+          return mimeType === validType;
+        });
+      }
+      return true;
+    }
+
+    // Error codes
+    const FILE_INVALID_TYPE = "file-invalid-type";
+    const FILE_TOO_LARGE = "file-too-large";
+    const FILE_TOO_SMALL = "file-too-small";
+    const TOO_MANY_FILES = "too-many-files";
+
+    // File Errors
+    const getInvalidTypeRejectionErr = (accept) => {
+      accept = Array.isArray(accept) && accept.length === 1 ? accept[0] : accept;
+      const messageSuffix = Array.isArray(accept)
+        ? `one of ${accept.join(", ")}`
+        : accept;
+      return {
+        code: FILE_INVALID_TYPE,
+        message: `File type must be ${messageSuffix}`,
+      };
+    };
+
+    const getTooLargeRejectionErr = (maxSize) => {
+      return {
+        code: FILE_TOO_LARGE,
+        message: `File is larger than ${maxSize} bytes`,
+      };
+    };
+
+    const getTooSmallRejectionErr = (minSize) => {
+      return {
+        code: FILE_TOO_SMALL,
+        message: `File is smaller than ${minSize} bytes`,
+      };
+    };
+
+    const TOO_MANY_FILES_REJECTION = {
+      code: TOO_MANY_FILES,
+      message: "Too many files",
+    };
+
+    // Firefox versions prior to 53 return a bogus MIME type for every file drag, so dragovers with
+    // that MIME type will always be accepted
+    function fileAccepted(file, accept) {
+      const isAcceptable =
+        file.type === "application/x-moz-file" || accepts(file, accept);
+      return [
+        isAcceptable,
+        isAcceptable ? null : getInvalidTypeRejectionErr(accept),
+      ];
+    }
+
+    function fileMatchSize(file, minSize, maxSize) {
+      if (isDefined(file.size)) {
+        if (isDefined(minSize) && isDefined(maxSize)) {
+          if (file.size > maxSize) return [false, getTooLargeRejectionErr(maxSize)];
+          if (file.size < minSize) return [false, getTooSmallRejectionErr(minSize)];
+        } else if (isDefined(minSize) && file.size < minSize)
+          return [false, getTooSmallRejectionErr(minSize)];
+        else if (isDefined(maxSize) && file.size > maxSize)
+          return [false, getTooLargeRejectionErr(maxSize)];
+      }
+      return [true, null];
+    }
+
+    function isDefined(value) {
+      return value !== undefined && value !== null;
+    }
+
+    function allFilesAccepted({
+      files,
+      accept,
+      minSize,
+      maxSize,
+      multiple,
+    }) {
+      if (!multiple && files.length > 1) {
+        return false;
+      }
+
+      return files.every((file) => {
+        const [accepted] = fileAccepted(file, accept);
+        const [sizeMatch] = fileMatchSize(file, minSize, maxSize);
+        return accepted && sizeMatch;
+      });
+    }
+
+    // React's synthetic events has event.isPropagationStopped,
+    // but to remain compatibility with other libs (Preact) fall back
+    // to check event.cancelBubble
+    function isPropagationStopped(event) {
+      if (typeof event.isPropagationStopped === "function") {
+        return event.isPropagationStopped();
+      } else if (typeof event.cancelBubble !== "undefined") {
+        return event.cancelBubble;
+      }
+      return false;
+    }
+
+    function isEvtWithFiles(event) {
+      if (!event.dataTransfer) {
+        return !!event.target && !!event.target.files;
+      }
+      // https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types
+      // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Recommended_drag_types#file
+      return Array.prototype.some.call(
+        event.dataTransfer.types,
+        (type) => type === "Files" || type === "application/x-moz-file"
+      );
+    }
+
+    // allow the entire document to be a drag target
+    function onDocumentDragOver(event) {
+      event.preventDefault();
+    }
+
+    function isIe(userAgent) {
+      return (
+        userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident/") !== -1
+      );
+    }
+
+    function isEdge(userAgent) {
+      return userAgent.indexOf("Edge/") !== -1;
+    }
+
+    function isIeOrEdge(userAgent = window.navigator.userAgent) {
+      return isIe(userAgent) || isEdge(userAgent);
+    }
+
+    /**
+     * This is intended to be used to compose event handlers
+     * They are executed in order until one of them calls `event.isPropagationStopped()`.
+     * Note that the check is done on the first invoke too,
+     * meaning that if propagation was stopped before invoking the fns,
+     * no handlers will be executed.
+     *
+     * @param {Function} fns the event hanlder functions
+     * @return {Function} the event handler to add to an element
+     */
+    function composeEventHandlers(...fns) {
+      return (event, ...args) =>
+        fns.some((fn) => {
+          if (!isPropagationStopped(event) && fn) {
+            fn(event, ...args);
+          }
+          return isPropagationStopped(event);
+        });
+    }
+
+    /* node_modules/svelte-file-dropzone/src/components/Dropzone.svelte generated by Svelte v3.32.0 */
+    const file = "node_modules/svelte-file-dropzone/src/components/Dropzone.svelte";
+
+    // (350:8)       
+    function fallback_block(ctx) {
+    	let p;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Drag 'n' drop some files here, or click to select files";
+    			add_location(p, file, 350, 4, 9206);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: fallback_block.name,
+    		type: "fallback",
+    		source: "(350:8)       ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let div;
+    	let input;
+    	let t;
+    	let div_class_value;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	const default_slot_template = /*#slots*/ ctx[28].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[27], null);
+    	const default_slot_or_fallback = default_slot || fallback_block(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			input = element("input");
+    			t = space();
+    			if (default_slot_or_fallback) default_slot_or_fallback.c();
+    			attr_dev(input, "accept", /*accept*/ ctx[0]);
+    			input.multiple = /*multiple*/ ctx[1];
+    			attr_dev(input, "type", "file");
+    			attr_dev(input, "autocomplete", "off");
+    			attr_dev(input, "tabindex", "-1");
+    			set_style(input, "display", "none");
+    			add_location(input, file, 339, 2, 8975);
+    			attr_dev(div, "tabindex", "0");
+    			attr_dev(div, "class", div_class_value = "" + ((/*disableDefaultStyles*/ ctx[4] ? "" : "dropzone") + "\r\n  " + /*containerClasses*/ ctx[2] + " svelte-817dg2"));
+    			attr_dev(div, "style", /*containerStyles*/ ctx[3]);
+    			add_location(div, file, 325, 0, 8444);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, input);
+    			/*input_binding*/ ctx[29](input);
+    			append_dev(div, t);
+
+    			if (default_slot_or_fallback) {
+    				default_slot_or_fallback.m(div, null);
+    			}
+
+    			/*div_binding*/ ctx[30](div);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", /*onDropCb*/ ctx[14], false, false, false),
+    					listen_dev(input, "click", onInputElementClick, false, false, false),
+    					listen_dev(div, "keydown", /*composeKeyboardHandler*/ ctx[16](/*onKeyDownCb*/ ctx[7]), false, false, false),
+    					listen_dev(div, "focus", /*composeKeyboardHandler*/ ctx[16](/*onFocusCb*/ ctx[8]), false, false, false),
+    					listen_dev(div, "blur", /*composeKeyboardHandler*/ ctx[16](/*onBlurCb*/ ctx[9]), false, false, false),
+    					listen_dev(div, "click", /*composeHandler*/ ctx[15](/*onClickCb*/ ctx[10]), false, false, false),
+    					listen_dev(div, "dragenter", /*composeDragHandler*/ ctx[17](/*onDragEnterCb*/ ctx[11]), false, false, false),
+    					listen_dev(div, "dragover", /*composeDragHandler*/ ctx[17](/*onDragOverCb*/ ctx[12]), false, false, false),
+    					listen_dev(div, "dragleave", /*composeDragHandler*/ ctx[17](/*onDragLeaveCb*/ ctx[13]), false, false, false),
+    					listen_dev(div, "drop", /*composeDragHandler*/ ctx[17](/*onDropCb*/ ctx[14]), false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty[0] & /*accept*/ 1) {
+    				attr_dev(input, "accept", /*accept*/ ctx[0]);
+    			}
+
+    			if (!current || dirty[0] & /*multiple*/ 2) {
+    				prop_dev(input, "multiple", /*multiple*/ ctx[1]);
+    			}
+
+    			if (default_slot) {
+    				if (default_slot.p && dirty[0] & /*$$scope*/ 134217728) {
+    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[27], dirty, null, null);
+    				}
+    			}
+
+    			if (!current || dirty[0] & /*disableDefaultStyles, containerClasses*/ 20 && div_class_value !== (div_class_value = "" + ((/*disableDefaultStyles*/ ctx[4] ? "" : "dropzone") + "\r\n  " + /*containerClasses*/ ctx[2] + " svelte-817dg2"))) {
+    				attr_dev(div, "class", div_class_value);
+    			}
+
+    			if (!current || dirty[0] & /*containerStyles*/ 8) {
+    				attr_dev(div, "style", /*containerStyles*/ ctx[3]);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot_or_fallback, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot_or_fallback, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			/*input_binding*/ ctx[29](null);
+    			if (default_slot_or_fallback) default_slot_or_fallback.d(detaching);
+    			/*div_binding*/ ctx[30](null);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function onInputElementClick(event) {
+    	event.stopPropagation();
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("Dropzone", slots, ['default']);
+    	let { accept } = $$props; // string or string[]
+    	let { disabled = false } = $$props;
+    	let { getFilesFromEvent = fromEvent } = $$props;
+    	let { maxSize = Infinity } = $$props;
+    	let { minSize = 0 } = $$props;
+    	let { multiple = true } = $$props;
+    	let { preventDropOnDocument = true } = $$props;
+    	let { noClick = false } = $$props;
+    	let { noKeyboard = false } = $$props;
+    	let { noDrag = false } = $$props;
+    	let { noDragEventsBubbling = false } = $$props;
+    	let { containerClasses = "" } = $$props;
+    	let { containerStyles = "" } = $$props;
+    	let { disableDefaultStyles = false } = $$props;
+    	const dispatch = createEventDispatcher();
+
+    	//state
+    	let state = {
+    		isFocused: false,
+    		isFileDialogActive: false,
+    		isDragActive: false,
+    		isDragAccept: false,
+    		isDragReject: false,
+    		draggedFiles: [],
+    		acceptedFiles: [],
+    		fileRejections: []
+    	};
+
+    	let rootRef;
+    	let inputRef;
+
+    	function resetState() {
+    		state.isFileDialogActive = false;
+    		state.isDragActive = false;
+    		state.draggedFiles = [];
+    		state.acceptedFiles = [];
+    		state.fileRejections = [];
+    	}
+
+    	// Fn for opening the file dialog programmatically
+    	function openFileDialog() {
+    		if (inputRef) {
+    			$$invalidate(6, inputRef.value = null, inputRef); // TODO check if null needs to be set
+    			state.isFileDialogActive = true;
+    			inputRef.click();
+    		}
+    	}
+
+    	// Cb to open the file dialog when SPACE/ENTER occurs on the dropzone
+    	function onKeyDownCb(event) {
+    		// Ignore keyboard events bubbling up the DOM tree
+    		if (!rootRef || !rootRef.isEqualNode(event.target)) {
+    			return;
+    		}
+
+    		if (event.keyCode === 32 || event.keyCode === 13) {
+    			event.preventDefault();
+    			openFileDialog();
+    		}
+    	}
+
+    	// Update focus state for the dropzone
+    	function onFocusCb() {
+    		state.isFocused = true;
+    	}
+
+    	function onBlurCb() {
+    		state.isFocused = false;
+    	}
+
+    	// Cb to open the file dialog when click occurs on the dropzone
+    	function onClickCb() {
+    		if (noClick) {
+    			return;
+    		}
+
+    		// In IE11/Edge the file-browser dialog is blocking, therefore, use setTimeout()
+    		// to ensure React can handle state changes
+    		// See: https://github.com/react-dropzone/react-dropzone/issues/450
+    		if (isIeOrEdge()) {
+    			setTimeout(openFileDialog, 0);
+    		} else {
+    			openFileDialog();
+    		}
+    	}
+
+    	function onDragEnterCb(event) {
+    		event.preventDefault();
+    		stopPropagation(event);
+    		dragTargetsRef = [...dragTargetsRef, event.target];
+
+    		if (isEvtWithFiles(event)) {
+    			Promise.resolve(getFilesFromEvent(event)).then(draggedFiles => {
+    				if (isPropagationStopped(event) && !noDragEventsBubbling) {
+    					return;
+    				}
+
+    				state.draggedFiles = draggedFiles;
+    				state.isDragActive = true;
+    				dispatch("dragenter", { dragEvent: event });
+    			});
+    		}
+    	}
+
+    	function onDragOverCb(event) {
+    		event.preventDefault();
+    		stopPropagation(event);
+
+    		if (event.dataTransfer) {
+    			try {
+    				event.dataTransfer.dropEffect = "copy";
+    			} catch {
+    				
+    			} /* eslint-disable-line no-empty */
+    		}
+
+    		if (isEvtWithFiles(event)) {
+    			dispatch("dragover", { dragEvent: event });
+    		}
+
+    		return false;
+    	}
+
+    	function onDragLeaveCb(event) {
+    		event.preventDefault();
+    		stopPropagation(event);
+
+    		// Only deactivate once the dropzone and all children have been left
+    		const targets = dragTargetsRef.filter(target => rootRef && rootRef.contains(target));
+
+    		// Make sure to remove a target present multiple times only once
+    		// (Firefox may fire dragenter/dragleave multiple times on the same element)
+    		const targetIdx = targets.indexOf(event.target);
+
+    		if (targetIdx !== -1) {
+    			targets.splice(targetIdx, 1);
+    		}
+
+    		dragTargetsRef = targets;
+
+    		if (targets.length > 0) {
+    			return;
+    		}
+
+    		state.isDragActive = false;
+    		state.draggedFiles = [];
+
+    		if (isEvtWithFiles(event)) {
+    			dispatch("dragleave", { dragEvent: event });
+    		}
+    	}
+
+    	function onDropCb(event) {
+    		event.preventDefault();
+    		stopPropagation(event);
+    		dragTargetsRef = [];
+
+    		if (isEvtWithFiles(event)) {
+    			Promise.resolve(getFilesFromEvent(event)).then(files => {
+    				if (isPropagationStopped(event) && !noDragEventsBubbling) {
+    					return;
+    				}
+
+    				const acceptedFiles = [];
+    				const fileRejections = [];
+
+    				files.forEach(file => {
+    					const [accepted, acceptError] = fileAccepted(file, accept);
+    					const [sizeMatch, sizeError] = fileMatchSize(file, minSize, maxSize);
+
+    					if (accepted && sizeMatch) {
+    						acceptedFiles.push(file);
+    					} else {
+    						const errors = [acceptError, sizeError].filter(e => e);
+    						fileRejections.push({ file, errors });
+    					}
+    				});
+
+    				if (!multiple && acceptedFiles.length > 1) {
+    					// Reject everything and empty accepted files
+    					acceptedFiles.forEach(file => {
+    						fileRejections.push({ file, errors: [TOO_MANY_FILES_REJECTION] });
+    					});
+
+    					acceptedFiles.splice(0);
+    				}
+
+    				state.acceptedFiles = acceptedFiles;
+    				state.fileRejections = fileRejections;
+    				dispatch("drop", { acceptedFiles, fileRejections, event });
+
+    				if (fileRejections.length > 0) {
+    					dispatch("droprejected", { fileRejections, event });
+    				}
+
+    				if (acceptedFiles.length > 0) {
+    					dispatch("dropaccepted", { acceptedFiles, event });
+    				}
+    			});
+    		}
+
+    		resetState();
+    	}
+
+    	function composeHandler(fn) {
+    		return disabled ? null : fn;
+    	}
+
+    	function composeKeyboardHandler(fn) {
+    		return noKeyboard ? null : composeHandler(fn);
+    	}
+
+    	function composeDragHandler(fn) {
+    		return noDrag ? null : composeHandler(fn);
+    	}
+
+    	function stopPropagation(event) {
+    		if (noDragEventsBubbling) {
+    			event.stopPropagation();
+    		}
+    	}
+
+    	let dragTargetsRef = [];
+
+    	function onDocumentDrop(event) {
+    		if (rootRef && rootRef.contains(event.target)) {
+    			// If we intercepted an event for our instance, let it propagate down to the instance's onDrop handler
+    			return;
+    		}
+
+    		event.preventDefault();
+    		dragTargetsRef = [];
+    	}
+
+    	// Update file dialog active state when the window is focused on
+    	function onWindowFocus() {
+    		// Execute the timeout only if the file dialog is opened in the browser
+    		if (state.isFileDialogActive) {
+    			setTimeout(
+    				() => {
+    					if (inputRef) {
+    						const { files } = inputRef;
+
+    						if (!files.length) {
+    							state.isFileDialogActive = false;
+    							dispatch("filedialogcancel");
+    						}
+    					}
+    				},
+    				300
+    			);
+    		}
+    	}
+
+    	onMount(() => {
+    		window.addEventListener("focus", onWindowFocus, false);
+
+    		if (preventDropOnDocument) {
+    			document.addEventListener("dragover", onDocumentDragOver, false);
+    			document.addEventListener("drop", onDocumentDrop, false);
+    		}
+    	});
+
+    	onDestroy(() => {
+    		window.removeEventListener("focus", onWindowFocus, false);
+
+    		if (preventDropOnDocument) {
+    			document.removeEventListener("dragover", onDocumentDragOver);
+    			document.removeEventListener("drop", onDocumentDrop);
+    		}
+    	});
+
+    	const writable_props = [
+    		"accept",
+    		"disabled",
+    		"getFilesFromEvent",
+    		"maxSize",
+    		"minSize",
+    		"multiple",
+    		"preventDropOnDocument",
+    		"noClick",
+    		"noKeyboard",
+    		"noDrag",
+    		"noDragEventsBubbling",
+    		"containerClasses",
+    		"containerStyles",
+    		"disableDefaultStyles"
+    	];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Dropzone> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			inputRef = $$value;
+    			$$invalidate(6, inputRef);
+    		});
+    	}
+
+    	function div_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			rootRef = $$value;
+    			$$invalidate(5, rootRef);
+    		});
+    	}
+
+    	$$self.$$set = $$props => {
+    		if ("accept" in $$props) $$invalidate(0, accept = $$props.accept);
+    		if ("disabled" in $$props) $$invalidate(18, disabled = $$props.disabled);
+    		if ("getFilesFromEvent" in $$props) $$invalidate(19, getFilesFromEvent = $$props.getFilesFromEvent);
+    		if ("maxSize" in $$props) $$invalidate(20, maxSize = $$props.maxSize);
+    		if ("minSize" in $$props) $$invalidate(21, minSize = $$props.minSize);
+    		if ("multiple" in $$props) $$invalidate(1, multiple = $$props.multiple);
+    		if ("preventDropOnDocument" in $$props) $$invalidate(22, preventDropOnDocument = $$props.preventDropOnDocument);
+    		if ("noClick" in $$props) $$invalidate(23, noClick = $$props.noClick);
+    		if ("noKeyboard" in $$props) $$invalidate(24, noKeyboard = $$props.noKeyboard);
+    		if ("noDrag" in $$props) $$invalidate(25, noDrag = $$props.noDrag);
+    		if ("noDragEventsBubbling" in $$props) $$invalidate(26, noDragEventsBubbling = $$props.noDragEventsBubbling);
+    		if ("containerClasses" in $$props) $$invalidate(2, containerClasses = $$props.containerClasses);
+    		if ("containerStyles" in $$props) $$invalidate(3, containerStyles = $$props.containerStyles);
+    		if ("disableDefaultStyles" in $$props) $$invalidate(4, disableDefaultStyles = $$props.disableDefaultStyles);
+    		if ("$$scope" in $$props) $$invalidate(27, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		fromEvent,
+    		allFilesAccepted,
+    		composeEventHandlers,
+    		fileAccepted,
+    		fileMatchSize,
+    		isEvtWithFiles,
+    		isIeOrEdge,
+    		isPropagationStopped,
+    		onDocumentDragOver,
+    		TOO_MANY_FILES_REJECTION,
+    		onMount,
+    		onDestroy,
+    		createEventDispatcher,
+    		accept,
+    		disabled,
+    		getFilesFromEvent,
+    		maxSize,
+    		minSize,
+    		multiple,
+    		preventDropOnDocument,
+    		noClick,
+    		noKeyboard,
+    		noDrag,
+    		noDragEventsBubbling,
+    		containerClasses,
+    		containerStyles,
+    		disableDefaultStyles,
+    		dispatch,
+    		state,
+    		rootRef,
+    		inputRef,
+    		resetState,
+    		openFileDialog,
+    		onKeyDownCb,
+    		onFocusCb,
+    		onBlurCb,
+    		onClickCb,
+    		onDragEnterCb,
+    		onDragOverCb,
+    		onDragLeaveCb,
+    		onDropCb,
+    		composeHandler,
+    		composeKeyboardHandler,
+    		composeDragHandler,
+    		stopPropagation,
+    		dragTargetsRef,
+    		onDocumentDrop,
+    		onWindowFocus,
+    		onInputElementClick
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("accept" in $$props) $$invalidate(0, accept = $$props.accept);
+    		if ("disabled" in $$props) $$invalidate(18, disabled = $$props.disabled);
+    		if ("getFilesFromEvent" in $$props) $$invalidate(19, getFilesFromEvent = $$props.getFilesFromEvent);
+    		if ("maxSize" in $$props) $$invalidate(20, maxSize = $$props.maxSize);
+    		if ("minSize" in $$props) $$invalidate(21, minSize = $$props.minSize);
+    		if ("multiple" in $$props) $$invalidate(1, multiple = $$props.multiple);
+    		if ("preventDropOnDocument" in $$props) $$invalidate(22, preventDropOnDocument = $$props.preventDropOnDocument);
+    		if ("noClick" in $$props) $$invalidate(23, noClick = $$props.noClick);
+    		if ("noKeyboard" in $$props) $$invalidate(24, noKeyboard = $$props.noKeyboard);
+    		if ("noDrag" in $$props) $$invalidate(25, noDrag = $$props.noDrag);
+    		if ("noDragEventsBubbling" in $$props) $$invalidate(26, noDragEventsBubbling = $$props.noDragEventsBubbling);
+    		if ("containerClasses" in $$props) $$invalidate(2, containerClasses = $$props.containerClasses);
+    		if ("containerStyles" in $$props) $$invalidate(3, containerStyles = $$props.containerStyles);
+    		if ("disableDefaultStyles" in $$props) $$invalidate(4, disableDefaultStyles = $$props.disableDefaultStyles);
+    		if ("state" in $$props) state = $$props.state;
+    		if ("rootRef" in $$props) $$invalidate(5, rootRef = $$props.rootRef);
+    		if ("inputRef" in $$props) $$invalidate(6, inputRef = $$props.inputRef);
+    		if ("dragTargetsRef" in $$props) dragTargetsRef = $$props.dragTargetsRef;
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		accept,
+    		multiple,
+    		containerClasses,
+    		containerStyles,
+    		disableDefaultStyles,
+    		rootRef,
+    		inputRef,
+    		onKeyDownCb,
+    		onFocusCb,
+    		onBlurCb,
+    		onClickCb,
+    		onDragEnterCb,
+    		onDragOverCb,
+    		onDragLeaveCb,
+    		onDropCb,
+    		composeHandler,
+    		composeKeyboardHandler,
+    		composeDragHandler,
+    		disabled,
+    		getFilesFromEvent,
+    		maxSize,
+    		minSize,
+    		preventDropOnDocument,
+    		noClick,
+    		noKeyboard,
+    		noDrag,
+    		noDragEventsBubbling,
+    		$$scope,
+    		slots,
+    		input_binding,
+    		div_binding
+    	];
+    }
+
+    class Dropzone extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(
+    			this,
+    			options,
+    			instance,
+    			create_fragment,
+    			safe_not_equal,
+    			{
+    				accept: 0,
+    				disabled: 18,
+    				getFilesFromEvent: 19,
+    				maxSize: 20,
+    				minSize: 21,
+    				multiple: 1,
+    				preventDropOnDocument: 22,
+    				noClick: 23,
+    				noKeyboard: 24,
+    				noDrag: 25,
+    				noDragEventsBubbling: 26,
+    				containerClasses: 2,
+    				containerStyles: 3,
+    				disableDefaultStyles: 4
+    			},
+    			[-1, -1]
+    		);
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Dropzone",
+    			options,
+    			id: create_fragment.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*accept*/ ctx[0] === undefined && !("accept" in props)) {
+    			console.warn("<Dropzone> was created without expected prop 'accept'");
+    		}
+    	}
+
+    	get accept() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set accept(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get disabled() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set disabled(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get getFilesFromEvent() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set getFilesFromEvent(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get maxSize() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set maxSize(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get minSize() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set minSize(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get multiple() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set multiple(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get preventDropOnDocument() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set preventDropOnDocument(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get noClick() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set noClick(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get noKeyboard() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set noKeyboard(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get noDrag() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set noDrag(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get noDragEventsBubbling() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set noDragEventsBubbling(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get containerClasses() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set containerClasses(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get containerStyles() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set containerStyles(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get disableDefaultStyles() {
+    		throw new Error("<Dropzone>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set disableDefaultStyles(value) {
+    		throw new Error("<Dropzone>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    const subscriber_queue = [];
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     */
+    function writable(value, start = noop) {
+        let stop;
+        const subscribers = [];
+        function set(new_value) {
+            if (safe_not_equal(value, new_value)) {
+                value = new_value;
+                if (stop) { // store is ready
+                    const run_queue = !subscriber_queue.length;
+                    for (let i = 0; i < subscribers.length; i += 1) {
+                        const s = subscribers[i];
+                        s[1]();
+                        subscriber_queue.push(s, value);
+                    }
+                    if (run_queue) {
+                        for (let i = 0; i < subscriber_queue.length; i += 2) {
+                            subscriber_queue[i][0](subscriber_queue[i + 1]);
+                        }
+                        subscriber_queue.length = 0;
+                    }
+                }
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = noop) {
+            const subscriber = [run, invalidate];
+            subscribers.push(subscriber);
+            if (subscribers.length === 1) {
+                stop = start(set) || noop;
+            }
+            run(value);
+            return () => {
+                const index = subscribers.indexOf(subscriber);
+                if (index !== -1) {
+                    subscribers.splice(index, 1);
+                }
+                if (subscribers.length === 0) {
+                    stop();
+                    stop = null;
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+
+    class VectorMean {
+        constructor() {
+            this.reset() ;
+        }
+
+        reset() {
+            this.value = 0 ;
+            this.n = 0 ;
+          }
+
+        append(newValue, w = 1.0) {
+            if (this.n == 0) {
+                this.n = w ;
+                this.value = [] ;
+                for( let i=0; i<newValue.length; i++) {
+                    this.value.push(newValue[i] / w) ;
+                }
+            } else {
+                if (this.value.length != newValue.length) {
+                    throw new Error('New value has different len from current value') ;
+                }
+                
+                for( let i=0; i<this.value.length; i++) {
+                    this.value[i] = (this.value[i] * this.n + newValue[i] * w) / (this.n + w) ;
+                }
+
+                this.n += w ;
+            }
+        }
+
+        result() {
+            return [...this.value] ;
+        }
+    }
+            
+
+    function createCurrentQuery() {
+        const { subscribe, set, update } = writable();
+
+        const queryList = new VectorMean() ;
+        const imagesList = new Set() ;
+        const negW = 0.8 ;
+        const posW = 1 ;
+        const oriW = 2 ;
+
+        const resetQuery = (q) => {
+            imagesList.clear();
+            queryList.reset();
+
+            queryList.append(q, oriW) ;
+
+            set(queryList.result()) ;
+        };
+
+        const getImageList = () => {
+            return imagesList ;
+        };
+
+        const appendQuery = async (fname, q, w) => {
+            if (w > 0) {
+                queryList.append(q, posW * w) ;
+            } else {
+                queryList.append(q, negW * w) ;
+            }
+
+            imagesList.add(fname) ;
+
+            set(queryList.result()) ;
+        };
+
+        return {
+            subscribe,
+            resetQuery: resetQuery,
+            appendQuery: appendQuery,
+            getImageList: getImageList
+
+        };
+    }
+
+    const currentQuery = createCurrentQuery();
+
+    function fade(node, { delay = 0, duration = 400, easing = identity }) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
+    }
+
+    /* src/App.svelte generated by Svelte v3.32.0 */
+
+    const { Object: Object_1 } = globals;
+    const file$1 = "src/App.svelte";
+
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[18] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[21] = list[i];
+    	return child_ctx;
+    }
+
+    // (223:12) {:else}
+    function create_else_block_1(ctx) {
+    	let h1;
+    	let t1;
+    	let input;
+    	let t2;
+    	let await_block_anchor;
+    	let promise;
+    	let mounted;
+    	let dispose;
+
+    	let info = {
+    		ctx,
+    		current: null,
+    		token: null,
+    		hasCatch: false,
+    		pending: create_pending_block,
+    		then: create_then_block,
+    		catch: create_catch_block
+    	};
+
+    	handle_promise(promise = /*currentPromisse*/ ctx[4], info);
+
+    	const block = {
+    		c: function create() {
+    			h1 = element("h1");
+    			h1.textContent = "CLIP-Search";
+    			t1 = space();
+    			input = element("input");
+    			t2 = space();
+    			await_block_anchor = empty();
+    			info.block.c();
+    			attr_dev(h1, "class", "svelte-uhug7k");
+    			add_location(h1, file$1, 223, 16, 5274);
+    			attr_dev(input, "placeholder", "Type a text or drag images here");
+    			attr_dev(input, "class", "search-box svelte-uhug7k");
+    			add_location(input, file$1, 225, 16, 5312);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h1, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, input, anchor);
+    			set_input_value(input, /*prompt*/ ctx[1]);
+    			insert_dev(target, t2, anchor);
+    			insert_dev(target, await_block_anchor, anchor);
+    			info.block.m(target, info.anchor = anchor);
+    			info.mount = () => await_block_anchor.parentNode;
+    			info.anchor = await_block_anchor;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[12]),
+    					listen_dev(input, "keyup", /*handleKeyup*/ ctx[8], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*prompt*/ 2 && input.value !== /*prompt*/ ctx[1]) {
+    				set_input_value(input, /*prompt*/ ctx[1]);
+    			}
+
+    			info.ctx = ctx;
+
+    			if (dirty & /*currentPromisse*/ 16 && promise !== (promise = /*currentPromisse*/ ctx[4]) && handle_promise(promise, info)) ; else {
+    				const child_ctx = ctx.slice();
+    				info.block.p(child_ctx, dirty);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h1);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(input);
+    			if (detaching) detach_dev(t2);
+    			if (detaching) detach_dev(await_block_anchor);
+    			info.block.d(detaching);
+    			info.token = null;
+    			info = null;
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block_1.name,
+    		type: "else",
+    		source: "(223:12) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (217:12) {#if draggingVisible}
+    function create_if_block_2(ctx) {
+    	let dropzone;
+    	let current;
+
+    	dropzone = new Dropzone({
+    			props: { accept: "image/*", multiple: true },
+    			$$inline: true
+    		});
+
+    	dropzone.$on("dropaccepted", /*handleFilesSelect*/ ctx[6]);
+
+    	const block = {
+    		c: function create() {
+    			create_component(dropzone.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(dropzone, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(dropzone.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(dropzone.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(dropzone, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(217:12) {#if draggingVisible}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (1:0) <script>     import Dropzone from "svelte-file-dropzone";     import { currentQuery }
+    function create_catch_block(ctx) {
+    	const block = { c: noop, m: noop, p: noop, d: noop };
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_catch_block.name,
+    		type: "catch",
+    		source: "(1:0) <script>     import Dropzone from \\\"svelte-file-dropzone\\\";     import { currentQuery }",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (229:16) {:then}
+    function create_then_block(ctx) {
+    	let button;
+    	let t;
+    	let button_disabled_value;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			t = text("Search");
+    			attr_dev(button, "class", "btn-search svelte-uhug7k");
+    			button.disabled = button_disabled_value = /*prompt*/ ctx[1].length == 0;
+    			add_location(button, file$1, 229, 20, 5603);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    			append_dev(button, t);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*searchByPrompt*/ ctx[7], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*prompt*/ 2 && button_disabled_value !== (button_disabled_value = /*prompt*/ ctx[1].length == 0)) {
+    				prop_dev(button, "disabled", button_disabled_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_then_block.name,
+    		type: "then",
+    		source: "(229:16) {:then}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (227:40)                      <button class="btn-search" disabled="disabled">Searching...</button>                 {:then}
+    function create_pending_block(ctx) {
+    	let button;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Searching...";
+    			attr_dev(button, "class", "btn-search svelte-uhug7k");
+    			button.disabled = "disabled";
+    			add_location(button, file$1, 227, 20, 5490);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_pending_block.name,
+    		type: "pending",
+    		source: "(227:40)                      <button class=\\\"btn-search\\\" disabled=\\\"disabled\\\">Searching...</button>                 {:then}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (240:8) {#if results.length > 0}
+    function create_if_block(ctx) {
+    	let p;
+    	let t;
+
+    	function select_block_type_1(ctx, dirty) {
+    		if (/*currentImages*/ ctx[5].length > 0) return create_if_block_1;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type_1(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t = text("Search results for:\n            ");
+    			if_block.c();
+    			add_location(p, file$1, 240, 12, 5908);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t);
+    			if_block.m(p, null);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (current_block_type === (current_block_type = select_block_type_1(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(p, null);
+    				}
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    			if_block.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(240:8) {#if results.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (247:12) {:else}
+    function create_else_block(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text(/*lastPrompt*/ ctx[2]);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*lastPrompt*/ 4) set_data_dev(t, /*lastPrompt*/ ctx[2]);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(247:12) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (243:12) {#if currentImages.length > 0}
+    function create_if_block_1(ctx) {
+    	let each_1_anchor;
+    	let each_value_1 = /*currentImages*/ ctx[5];
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*currentImages*/ 32) {
+    				each_value_1 = /*currentImages*/ ctx[5];
+    				validate_each_argument(each_value_1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(243:12) {#if currentImages.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (244:16) {#each currentImages as image}
+    function create_each_block_1(ctx) {
+    	let img;
+    	let img_src_value;
+
+    	const block = {
+    		c: function create() {
+    			img = element("img");
+    			if (img.src !== (img_src_value = /*image*/ ctx[21].src)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "search image");
+    			attr_dev(img, "class", "search-images svelte-uhug7k");
+    			add_location(img, file$1, 244, 16, 6050);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, img, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*currentImages*/ 32 && img.src !== (img_src_value = /*image*/ ctx[21].src)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(img);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(244:16) {#each currentImages as image}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (254:8) {#each results as result (result.fname)}
+    function create_each_block(key_1, ctx) {
+    	let div;
+    	let button0;
+    	let t1;
+    	let button1;
+    	let t3;
+    	let a;
+    	let img;
+    	let img_src_value;
+    	let img_alt_value;
+    	let a_href_value;
+    	let t4;
+    	let div_transition;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			div = element("div");
+    			button0 = element("button");
+    			button0.textContent = "More like this";
+    			t1 = space();
+    			button1 = element("button");
+    			button1.textContent = "Less like this";
+    			t3 = space();
+    			a = element("a");
+    			img = element("img");
+    			t4 = space();
+    			attr_dev(button0, "class", "svelte-uhug7k");
+    			add_location(button0, file$1, 255, 16, 6393);
+    			attr_dev(button1, "class", "svelte-uhug7k");
+    			add_location(button1, file$1, 256, 16, 6475);
+    			if (img.src !== (img_src_value = /*result*/ ctx[18].thumb)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", img_alt_value = /*result*/ ctx[18].thumb);
+    			attr_dev(img, "class", "svelte-uhug7k");
+    			add_location(img, file$1, 258, 20, 6618);
+    			attr_dev(a, "href", a_href_value = /*result*/ ctx[18].fname);
+    			attr_dev(a, "target", "_blank");
+    			add_location(a, file$1, 257, 16, 6558);
+    			attr_dev(div, "class", "result svelte-uhug7k");
+    			add_location(div, file$1, 254, 12, 6334);
+    			this.first = div;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, button0);
+    			append_dev(div, t1);
+    			append_dev(div, button1);
+    			append_dev(div, t3);
+    			append_dev(div, a);
+    			append_dev(a, img);
+    			append_dev(div, t4);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(
+    						button0,
+    						"click",
+    						function () {
+    							if (is_function(/*appendQuery*/ ctx[11](/*result*/ ctx[18], 1))) /*appendQuery*/ ctx[11](/*result*/ ctx[18], 1).apply(this, arguments);
+    						},
+    						false,
+    						false,
+    						false
+    					),
+    					listen_dev(
+    						button1,
+    						"click",
+    						function () {
+    							if (is_function(/*appendQuery*/ ctx[11](/*result*/ ctx[18], -1))) /*appendQuery*/ ctx[11](/*result*/ ctx[18], -1).apply(this, arguments);
+    						},
+    						false,
+    						false,
+    						false
+    					)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (!current || dirty & /*results*/ 8 && img.src !== (img_src_value = /*result*/ ctx[18].thumb)) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (!current || dirty & /*results*/ 8 && img_alt_value !== (img_alt_value = /*result*/ ctx[18].thumb)) {
+    				attr_dev(img, "alt", img_alt_value);
+    			}
+
+    			if (!current || dirty & /*results*/ 8 && a_href_value !== (a_href_value = /*result*/ ctx[18].fname)) {
+    				attr_dev(a, "href", a_href_value);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			if (local) {
+    				add_render_callback(() => {
+    					if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, true);
+    					div_transition.run(1);
+    				});
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (local) {
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, false);
+    				div_transition.run(0);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (detaching && div_transition) div_transition.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(254:8) {#each results as result (result.fname)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$1(ctx) {
+    	let div6;
+    	let div3;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let current_block_type_index;
+    	let if_block0;
+    	let t1;
+    	let div2;
+    	let t2;
+    	let div4;
+    	let t3;
+    	let div5;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let current;
+    	let mounted;
+    	let dispose;
+    	const if_block_creators = [create_if_block_2, create_else_block_1];
+    	const if_blocks = [];
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*draggingVisible*/ ctx[0]) return 0;
+    		return 1;
+    	}
+
+    	current_block_type_index = select_block_type(ctx);
+    	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    	let if_block1 = /*results*/ ctx[3].length > 0 && create_if_block(ctx);
+    	let each_value = /*results*/ ctx[3];
+    	validate_each_argument(each_value);
+    	const get_key = ctx => /*result*/ ctx[18].fname;
+    	validate_each_keys(ctx, each_value, get_each_context, get_key);
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		let child_ctx = get_each_context(ctx, each_value, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block(key, child_ctx));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div6 = element("div");
+    			div3 = element("div");
+    			div0 = element("div");
+    			t0 = space();
+    			div1 = element("div");
+    			if_block0.c();
+    			t1 = space();
+    			div2 = element("div");
+    			t2 = space();
+    			div4 = element("div");
+    			if (if_block1) if_block1.c();
+    			t3 = space();
+    			div5 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div0, "class", "positives svelte-uhug7k");
+    			add_location(div0, file$1, 213, 8, 4880);
+    			attr_dev(div1, "class", "search-area svelte-uhug7k");
+    			add_location(div1, file$1, 215, 8, 4927);
+    			attr_dev(div2, "class", "negatives svelte-uhug7k");
+    			add_location(div2, file$1, 234, 8, 5769);
+    			attr_dev(div3, "class", "header svelte-uhug7k");
+    			add_location(div3, file$1, 212, 4, 4851);
+    			attr_dev(div4, "class", "search-query svelte-uhug7k");
+    			add_location(div4, file$1, 238, 4, 5836);
+    			attr_dev(div5, "class", "results svelte-uhug7k");
+    			add_location(div5, file$1, 252, 4, 6251);
+    			attr_dev(div6, "class", "content");
+    			add_location(div6, file$1, 211, 0, 4825);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div6, anchor);
+    			append_dev(div6, div3);
+    			append_dev(div3, div0);
+    			append_dev(div3, t0);
+    			append_dev(div3, div1);
+    			if_blocks[current_block_type_index].m(div1, null);
+    			append_dev(div3, t1);
+    			append_dev(div3, div2);
+    			append_dev(div6, t2);
+    			append_dev(div6, div4);
+    			if (if_block1) if_block1.m(div4, null);
+    			append_dev(div6, t3);
+    			append_dev(div6, div5);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div5, null);
+    			}
+
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(div1, "dragenter", prevent_default(/*dragenterHeader*/ ctx[9]), false, true, false),
+    					listen_dev(div1, "dragleave", /*dragleaveHeader*/ ctx[10], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			let previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(ctx, dirty);
+    			} else {
+    				group_outros();
+
+    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    					if_blocks[previous_block_index] = null;
+    				});
+
+    				check_outros();
+    				if_block0 = if_blocks[current_block_type_index];
+
+    				if (!if_block0) {
+    					if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    					if_block0.c();
+    				} else {
+    					if_block0.p(ctx, dirty);
+    				}
+
+    				transition_in(if_block0, 1);
+    				if_block0.m(div1, null);
+    			}
+
+    			if (/*results*/ ctx[3].length > 0) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block(ctx);
+    					if_block1.c();
+    					if_block1.m(div4, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+
+    			if (dirty & /*results, appendQuery*/ 2056) {
+    				each_value = /*results*/ ctx[3];
+    				validate_each_argument(each_value);
+    				group_outros();
+    				validate_each_keys(ctx, each_value, get_each_context, get_key);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div5, outro_and_destroy_block, create_each_block, null, get_each_context);
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block0);
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block0);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div6);
+    			if_blocks[current_block_type_index].d();
+    			if (if_block1) if_block1.d();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    async function doFetchJSON(url, params = {}) {
+    	return fetch(url, params).then(r => r.json());
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let $currentQuery;
+    	validate_store(currentQuery, "currentQuery");
+    	component_subscribe($$self, currentQuery, $$value => $$invalidate(13, $currentQuery = $$value));
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("App", slots, []);
+    	let draggingVisible = false;
+    	let prompt = "";
+    	let lastPrompt = "";
+    	let results = [];
+    	let currentPromisse = Promise.all([]);
+    	let currentImages = [];
+
+    	function resetSearch() {
+    		$$invalidate(1, prompt = "");
+    		$$invalidate(5, currentImages = []);
+    	}
+
+    	function loadImage(selectedFile) {
+    		var reader = new FileReader();
+
+    		reader.onload = function (event) {
+    			let imgObject = new Object();
+    			imgObject.src = event.target.result;
+    			$$invalidate(5, currentImages = [...currentImages, imgObject]);
+    		};
+
+    		reader.readAsDataURL(selectedFile);
+    	}
+
+    	const handleFilesSelect = async e => {
+    		const { acceptedFiles } = e.detail;
+    		let data = new FormData();
+    		$$invalidate(5, currentImages = []);
+
+    		for (let i = 0; i < acceptedFiles.length; i++) {
+    			data.append("fileToUpload[]", acceptedFiles[i]);
+    			loadImage(acceptedFiles[i]);
+    		}
+
+    		$$invalidate(4, currentPromisse = doFetchJSON("/get-embedding", { method: "POST", body: data }).then(json => {
+    			$$invalidate(1, prompt = "");
+    			$$invalidate(2, lastPrompt = "");
+    			$$invalidate(0, draggingVisible = false);
+    			let query = json["_mean_"];
+    			return newSearch(query);
+    		}));
+    	};
+
+    	const getImageEmbeddings = async fname => {
+    		var url = new URL("/get-embedding", document.location);
+    		url.searchParams.append("src_image", fname);
+    		return doFetchJSON(url);
+    	};
+
+    	const newSearch = async query => {
+    		currentQuery.resetQuery(query);
+    		let data = { "query": $currentQuery };
+
+    		$$invalidate(3, results = await doFetchJSON("/search", {
+    			method: "POST",
+    			headers: { "Content-Type": "application/json" },
+    			body: JSON.stringify(data)
+    		}));
+    	};
+
+    	const searchByPrompt = async e => {
+    		var url = new URL("/get-embedding", document.location);
+    		$$invalidate(5, currentImages = []);
+    		url.searchParams.append("prompt", prompt);
+    		$$invalidate(2, lastPrompt = prompt);
+    		$$invalidate(4, currentPromisse = doFetchJSON(url).then(query => newSearch(query)));
+    	};
+
+    	const handleKeyup = event => {
+    		if (event.code == "Enter" || event.code == "NumpadEnter") {
+    			event.preventDefault();
+    			return searchByPrompt();
+    		}
+    	};
+
+    	const dragenterHeader = e => {
+    		$$invalidate(0, draggingVisible = true);
+    	};
+
+    	const dragleaveHeader = e => {
+    		$$invalidate(0, draggingVisible = false);
+    	};
+
+    	const appendQuery = async (result, w) => {
+    		let embedding = await getImageEmbeddings(result.fname);
+    		await currentQuery.appendQuery(result.fname, embedding, w);
+
+    		let data = {
+    			"query": $currentQuery,
+    			"query_excludes": Array.from(currentQuery.getImageList())
+    		};
+
+    		$$invalidate(3, results = await doFetchJSON("/search", {
+    			method: "POST",
+    			headers: { "Content-Type": "application/json" },
+    			body: JSON.stringify(data)
+    		}));
+    	};
+
+    	const writable_props = [];
+
+    	Object_1.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<App> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_input_handler() {
+    		prompt = this.value;
+    		$$invalidate(1, prompt);
+    	}
+
+    	$$self.$capture_state = () => ({
+    		Dropzone,
+    		currentQuery,
+    		fade,
+    		draggingVisible,
+    		prompt,
+    		lastPrompt,
+    		results,
+    		currentPromisse,
+    		currentImages,
+    		doFetchJSON,
+    		resetSearch,
+    		loadImage,
+    		handleFilesSelect,
+    		getImageEmbeddings,
+    		newSearch,
+    		searchByPrompt,
+    		handleKeyup,
+    		dragenterHeader,
+    		dragleaveHeader,
+    		appendQuery,
+    		$currentQuery
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("draggingVisible" in $$props) $$invalidate(0, draggingVisible = $$props.draggingVisible);
+    		if ("prompt" in $$props) $$invalidate(1, prompt = $$props.prompt);
+    		if ("lastPrompt" in $$props) $$invalidate(2, lastPrompt = $$props.lastPrompt);
+    		if ("results" in $$props) $$invalidate(3, results = $$props.results);
+    		if ("currentPromisse" in $$props) $$invalidate(4, currentPromisse = $$props.currentPromisse);
+    		if ("currentImages" in $$props) $$invalidate(5, currentImages = $$props.currentImages);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		draggingVisible,
+    		prompt,
+    		lastPrompt,
+    		results,
+    		currentPromisse,
+    		currentImages,
+    		handleFilesSelect,
+    		searchByPrompt,
+    		handleKeyup,
+    		dragenterHeader,
+    		dragleaveHeader,
+    		appendQuery,
+    		input_input_handler
+    	];
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "App",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+    }
+
+    const app = new App({
+    	target: document.body,
+    	props: {
+    		name: 'world'
+    	}
+    });
+
+    return app;
+
+}());
 //# sourceMappingURL=bundle.js.map
