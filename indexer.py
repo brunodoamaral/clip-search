@@ -154,7 +154,7 @@ class ImagesIndexer:
                 json.dump(self.images_files, f)
 
     def _rglob_extension(self, extension):
-        for fname in self.images_path.rglob(extension):
+        for fname in chain.from_iterable([self.images_path.rglob(extension), self.images_path.rglob(extension.upper())]):
             yield fname.relative_to(self.images_path)
 
 
