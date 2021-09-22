@@ -2,6 +2,8 @@
 
 Your private semantic search. No cloud needed!
 
+![Animated screenshot](clip-search.gif)
+
 ## Install
 
 The easiest way to install is as follow:
