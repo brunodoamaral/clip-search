@@ -9,7 +9,7 @@ Your private semantic search. No cloud needed!
 The easiest way to install is as follow:
 
 ```bash
-git clone --recursive https://url/to/repository
+git clone --recursive https://github.com/brunodoamaral/clip-search.git
 cd clip-search
 
 python3 -m venv clip-env
@@ -21,7 +21,7 @@ clip-env/bin/python3 app.py /path/to/my/pictures
 But it is strongly advised to install using conda:
 
 ```bash
-git clone --recursive https://url/to/repository
+git clone --recursive https://github.com/brunodoamaral/clip-search.git
 cd clip-search
 
 conda env create -n clip-env -f environment.yml
