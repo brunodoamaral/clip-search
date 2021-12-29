@@ -1,6 +1,8 @@
 # CLIP-Search
 
-Your private semantic search. No cloud needed!
+This is a demo project using [OpenAI CLIP](https://openai.com/blog/clip/).
+
+It provides a "more like this" and "less like this" button that tunes the embeddings in order to find similar images.
 
 ![Animated screenshot](clip-search.gif)
 
