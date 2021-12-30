@@ -13,10 +13,7 @@ class VectorMean {
     append(newValue, w = 1.0) {
         if (this.n == 0) {
             this.n = w ;
-            this.value = [] ;
-            for( let i=0; i<newValue.length; i++) {
-                this.value.push(newValue[i] / w) ;
-            }
+            this.value = newValue ;
         } else {
             if (this.value.length != newValue.length) {
                 throw new Error('New value has different len from current value') ;
