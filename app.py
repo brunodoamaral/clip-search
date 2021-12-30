@@ -113,6 +113,7 @@ def send_thumb(path):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('images_path', type=str, help='Path to images folder')
+    parser.add_argument('--rotation-invariant', help='Average embeddings of 4 rotations on image inputs', default=False, action='store_true')
     parser.add_argument('-p', '--port', type=int, help='Port to start server', default=5000)
     parser.add_argument('-s', '--host', type=str, help='Host to start server', default='0.0.0.0')
     parser.add_argument('--dev', help='Start in dev mode', default=False, action='store_true')
@@ -120,8 +121,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     images_path = Path(args.images_path)
+    rotation_invariant = args.rotation_invariant
 
-    INDEX = ImagesIndexer(images_path)
+    INDEX = ImagesIndexer(images_path, do_rotate_images=rotation_invariant)
 
     # Add dev env
     if args.dev:

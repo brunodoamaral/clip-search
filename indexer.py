@@ -16,6 +16,8 @@ from torchvision.utils import save_image
 from torchvision.transforms import CenterCrop, Compose, Normalize, Resize, ToTensor
 from tqdm import tqdm
 from thumbs import Thumbnails
+from threading import Thread
+from queue import Queue 
 
 EXTENSIONS_LIST = ["*.jpg", "*.png", "*.jpeg"]
 
@@ -45,16 +47,29 @@ class ImagesDataset(Dataset):
 def to_rgb(image):
     return image.convert("RGB")
 
+class FileAppenderThread(Thread):
+    def __init__(self, q:Queue, appender):
+        super().__init__()
+        self.q = q
+        self.appender = appender
+
+    def run(self):
+        while True:
+            image, fname = self.q.get()
+            if image is None:
+                break
+            save_image(image, self.appender.append(fname), format='JPEG')
 
 class ImagesIndexer:
-    def __init__(self, images_path):
+    def __init__(self, images_path, do_rotate_images=False):
         self.images_path = Path(images_path)
+        self.rotations = [0, 1, 2, 3] if do_rotate_images else [0]
         assert (
             images_path.exists()
         ), f"Image folder {images_path.resolve().absolute()} does not exist"
 
         self.index_base_path = images_path / ".index"
-        self.index_path = self.index_base_path / "index.npy"
+        self.index_path = self.index_base_path / ("index-rotation.npy" if do_rotate_images else "index.npy")
         self.images_files_path = self.index_base_path / "files.json"
         self.thumbs = Thumbnails(self.index_base_path)
 
@@ -133,17 +148,29 @@ class ImagesIndexer:
             self.index = []
 
             with self.thumbs.appender() as appender:
+                q_thread = Queue(256)
+                file_appender_thread = FileAppenderThread(q_thread, appender)
+                file_appender_thread.start()
+
                 for images, fnames in tqdm(dl, file=sys.stdout, bar_format="{l_bar}{bar}{r_bar}"):
                     # Images are not normalized yet. Save thumbnails
                     for image, fname in zip(images, fnames):
-                        save_image(image, appender.append(fname), format='JPEG')
+                        q_thread.put((image, fname))
 
                     # Normalize images before input
                     images = self.normalize_image(images)
                     with torch.no_grad():
-                        emb_images = self.model.encode_image(images)
-                        emb_images = emb_images.cpu().float().numpy()
+                        emb_images = torch.stack([
+                            self.model.encode_image(
+                                torch.rot90(images, rotation, [-2, -1])
+                            )
+                            for rotation in self.rotations
+                        ], 0).mean(0).cpu().float().numpy()
                     self.index.append(emb_images)
+
+                # Signal thread to finish
+                q_thread.put((None, None))
+                file_appender_thread.join()
 
             # Save results
             self.index = np.concatenate(self.index)
@@ -193,10 +220,16 @@ class ImagesIndexer:
         return emb_text.cpu().numpy()
 
     def encode_image(self, img, normalize=False):
-        image = self.normalize_image(self.preprocess_image(img)).unsqueeze(0).to(self.device)
+        image = self.normalize_image(self.preprocess_image(img)).to(self.device)
+
+        # Apply rotation
+        images_rot = torch.stack([
+            torch.rot90(image, rotation, [-2, -1])
+            for rotation in self.rotations
+        ], 0)
 
         with torch.no_grad():
-            image_features = self.model.encode_image(image).float()
+            image_features = self.model.encode_image(images_rot).float().mean(0)
 
         if normalize:
             image_features /= image_features.norm(dim=-1, keepdim=True)
