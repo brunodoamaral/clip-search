@@ -1,6 +1,8 @@
 # CLIP-Search
 
-Your private semantic search. No cloud needed!
+This is a demo project using [OpenAI CLIP](https://openai.com/blog/clip/).
+
+It provides a "more like this" and "less like this" button that tunes the embeddings in order to find similar images.
 
 ![Animated screenshot](clip-search.gif)
 
@@ -9,7 +11,7 @@ Your private semantic search. No cloud needed!
 The easiest way to install is as follow:
 
 ```bash
-git clone --recursive https://url/to/repository
+git clone --recursive https://github.com/brunodoamaral/clip-search.git
 cd clip-search
 
 python3 -m venv clip-env
@@ -18,10 +20,10 @@ clip-env/bin/pip3 install -r requirements.txt
 clip-env/bin/python3 app.py /path/to/my/pictures
 ````
 
-But it is strongly advised to instal using conda:
+But it is strongly advised to install using conda:
 
 ```bash
-git clone --recursive https://url/to/repository
+git clone --recursive https://github.com/brunodoamaral/clip-search.git
 cd clip-search
 
 conda env create -n clip-env -f environment.yml
@@ -34,11 +36,11 @@ Then point your browser to: http://localhost:5000/index.html
 
 ## Usage
 
-The basic usage is to search by text. But you can drag one of more pictures to the search
+The basic usage is to search by text. But you can drag one or more pictures to the search
 input in order to find similar images. It will "average" the semantics of all images before
 searching.
 
 ### More/less like this
 
-Use these buttoms to give a hint to the search of which kind of images are you searching
-for. Notice that once you click any of these buttoms, the image will be hidden from results.
+Use these buttons to give a hint to the search of which kind of images you are searching
+for. Notice that once you click any of these buttons, the image will be hidden from results.
