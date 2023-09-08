@@ -86,16 +86,16 @@ class ImagesIndexer:
         print(f"Torch will use self.device: {self.device}")
 
         print("Loading CLIP model...")
-        self.model, _ = clip.load("ViT-B/32", device=self.device)
+        self.model, _ = clip.load("ViT-B/32", device=self.device, jit=False)
         # self.model, preprocess = clip.load("RN50", device=self.device)
 
         self.model.eval()
 
-        self.input_resolution = self.model.input_resolution.item()
+        self.input_resolution = self.model.visual.input_resolution
         self.output_dim = self.model.encode_image(
-            torch.zeros(1, 3, self.input_resolution, self.input_resolution)
+            torch.zeros(1, 3, self.input_resolution, self.input_resolution, device=self.device)
         ).shape[1]
-        self.context_length = self.model.context_length.item()
+        self.context_length = self.model.context_length
 
         self.preprocess_image = Compose(
             [
@@ -141,7 +141,7 @@ class ImagesIndexer:
                 images_path, self.images_files, self.preprocess_image, self.input_resolution
             )
             dl = DataLoader(
-                ds, batch_size=256, shuffle=False, num_workers=os.cpu_count() // 2
+                ds, batch_size=32, shuffle=False, num_workers=os.cpu_count() // 4
             )
 
             print("Building index with CLIP. It may take a while...")
@@ -158,7 +158,7 @@ class ImagesIndexer:
                         q_thread.put((image, fname))
 
                     # Normalize images before input
-                    images = self.normalize_image(images)
+                    images = self.normalize_image(images).to(self.device)
                     with torch.no_grad():
                         emb_images = torch.stack([
                             self.model.encode_image(

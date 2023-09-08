@@ -40,7 +40,7 @@ class ThumbnailsAppender():
         # Write to index
         self._write_last_file()
 
-        self.last_file_name = fname
+        self.last_file_name = str(fname).replace('\\', '/')
 
         return self.thumb_file
 
@@ -57,11 +57,11 @@ class Thumbnails():
     def _load(self):
         print('Loading thumbs...')
         if not hasattr(self, 'thumb_index'):
-            with open(self.thumb_index_file_path, 'r') as f:
+            with open(self.thumb_index_file_path, 'r', encoding='utf-8') as f:
                 self.thumb_index = json.load(f)
 
             self.thumb_f = open(self.thumb_file_path, 'r')
-            self.thumb_data = mmap.mmap(self.thumb_f.fileno(), 0, prot=mmap.PROT_READ)
+            self.thumb_data = mmap.mmap(self.thumb_f.fileno(), 0, access=mmap.ACCESS_READ)
 
     def thumbnail(self, fname):
         self._load()
