@@ -192,6 +192,7 @@ class ImagesIndexer:
         unsorted_similarity = (self.index @ query.T).T
 
         # Take top_n unsorted indexes (but fast method!)
+        top_n = min(top_n, unsorted_similarity.shape[-1])
         unsorted_query_result = np.argpartition(unsorted_similarity, -top_n, axis=-1)[
             :, -top_n:
         ][:, ::-1]
